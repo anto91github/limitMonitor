@@ -57,7 +57,7 @@
         </a>
         <ul class="nav-group-items" style="height: 0px;">
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="#">
+                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/form-client-limit">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                     </svg>

@@ -55,5 +55,10 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
             Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
         });
+
+        /**
+         * Forms
+         */
+        Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('index');
     });
 });
