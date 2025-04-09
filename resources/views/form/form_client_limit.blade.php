@@ -15,7 +15,7 @@
                     @include('layouts.includes.messages')
                 </div>
 
-                <form action="" method="POST">
+                <form action="{{route('formclientlimit.store')}}" method="POST">
                     @csrf
                     <label class="form-label" for="client">Client</label>
                     <input class="form-control" type="text" name="client" id="client" required>
