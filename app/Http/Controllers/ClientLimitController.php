@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientLimitRequest;
 use App\Models\ClientLimit;
-use Illuminate\Http\Request;
+use Illuminate\Http\Client\Request;
 
 class ClientLimitController extends Controller
 {
@@ -13,17 +13,10 @@ class ClientLimitController extends Controller
         return view('/form/form_client_limit');
     }
 
-    /**
-     * Store a newly created user
-     *
-     * @param User $user
-     * @param StoreUserRequest $request
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(ClientLimit $client_limit, ClientLimitRequest $request)
     {
-       
+
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
         $client_limit->create([
@@ -33,5 +26,14 @@ class ClientLimitController extends Controller
 
         return redirect()->route('formclientlimit.index')
             ->withSuccess(__('Created successfully.'));
+    }
+
+    public function autocomplete(Request $request)
+    {
+        dd($request);
+        $search = $request->get('query');
+        $data_client = ClientLimit::where('Client', 'LIKE', "%{$search}%")->get();
+
+        return response()->json($data_client);
     }
 }
