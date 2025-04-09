@@ -17,6 +17,7 @@
     @stack('before-styles')
     @vite('resources/sass/app.scss')
     @stack('after-styles')
+    <script src="{{ asset('js/jquery.min.js') }}"></script>
 </head>
 
 <body>
@@ -54,7 +55,7 @@
     <!-- Scripts -->
     @stack('before-scripts')
 
-    <script src="{{ asset('js/jquery.min.js') }}"></script>
+    {{-- <script src="{{ asset('js/jquery.min.js') }}"></script> --}}
     <script src="{{ asset('js/coreui.bundle.min.js') }}"></script>
     @vite('resources/js/app.js')
 
