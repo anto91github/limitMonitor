@@ -16,25 +16,43 @@ Window Order
             </div>
 
             <div class="mb-2 text-end">
-                <a href="{{ route('window.create') }}" class="btn btn-primary btn-sm">Add New Order</a>
+                <a href="#" class="btn btn-primary btn-sm">Add New Order</a>
             </div>
+
+            <form action="#" method="GET">
+                @csrf
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="pencarian" id="searchInput" placeholder="Keyword" value="{{ request()->input('pencarian') }}">
+                            <button class="input-group-text btn btn-primary">Search</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <label for="datepicker">Date:</label>
+                            <input type="text" class="form-control" id="daterange" placeholder="Pilih rentang tanggal">
+                        </div>
+                    </div> -->
+                </div>                
+            </form>
 
             <div class="table-responsive">
                 <table class="table table-striped">
-                    <thead class="table-dark">
+                    <thead>
                         <tr>
-                            <th>#</th>
-                            <th>Trx Date</th>
-                            <th>Settle Date</th>
-                            <th>B/S</th>
-                            <th>Client</th>
-                            <th>Obligasi</th>
-                            <th>Nominal</th>
-                            <th>Harga</th>
-                            <th>Amount</th>
-                            <th>Status</th>
-                            <th>Approved By</th>
-                            <th>Actions</th>
+                            <th scope="col" width="3%">No</th>
+                            <th scope="col" >Trx Date</th>
+                            <th scope="col" >Settle Date</th>
+                            <th scope="col" width="5%">B / S</th>
+                            <th scope="col" >Client</th>                        
+                            <th scope="col" >Obligasi</th>
+                            <th scope="col" >Nominal</th>
+                            <th scope="col" >Harga</th>
+                            <th scope="col" >Amount</th>
+                            <th scope="col" >Status</th>
+                            <th scope="col" width="10%" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -63,23 +81,19 @@ Window Order
                                     <a href="#" class="btn btn-warning btn-sm" title="Edit">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    {{-- <form action="#" method="POST" style="display:inline;">
+                                    <form action="#" method="POST" style="display:inline;">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure?')">
                                             <i class="fas fa-trash"></i>
                                         </button>
-                                    </form> --}}
+                                    </form>
                                 </div>
                             </td>
                         </tr>
                         @endforeach
                     </tbody>
                 </table>
-            </div>
-
-            <div class="d-flex justify-content-center mt-3">
-                {{ $windowOrders->links() }}
             </div>
         </div>
     </div>
