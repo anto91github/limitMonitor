@@ -31,7 +31,6 @@ Window Approval
                     </div> -->
                 </div>                
             </form>
-
             <table class="table table-striped">
                 <thead>
                     <tr>

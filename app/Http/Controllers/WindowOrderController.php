@@ -14,6 +14,8 @@ class WindowOrderController extends Controller
      */
     public function index()
     {
-        return view('windowOrder.index');
+        $data = WindowOrder::orderBy('id', 'desc')
+            ->paginate(10);
+        return view('windowOrder/index', ['data' => $data]);
     }
 }

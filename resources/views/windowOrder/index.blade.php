@@ -52,44 +52,34 @@ Window Order
                             <th scope="col" >Harga</th>
                             <th scope="col" >Amount</th>
                             <th scope="col" >Status</th>
+                            <th scope="col" >Approved By</th>
+                            <th scope="col" >Approved Date</th>
                             <th scope="col" width="10%" colspan="3">Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($windowOrders as $order)
+                        @foreach($data as $d)
                         <tr>
-                            <td>{{ $order->Id }}</td>
-                            <td>{{ \Carbon\Carbon::parse($order->TrxDate)->format('d/m/Y') }}</td>
-                            <td>{{ \Carbon\Carbon::parse($order->SettleDate)->format('d/m/Y') }}</td>
-                            <td>{{ $order->BorS }}</td>
-                            <td>{{ $order->Client }}</td>
-                            <td>{{ $order->Obligasi }}</td>
-                            <td class="text-end">{{ number_format($order->Nominal, 0) }}</td>
-                            <td class="text-end">{{ number_format($order->Harga, 2) }}</td>
-                            <td class="text-end">{{ number_format($order->Amount, 2) }}</td>
-                            <td>
-                                <span class="badge bg-{{ $order->Status == 'Approved' ? 'success' : ($order->Status == 'Pending' ? 'warning' : 'danger') }}">
-                                    {{ $order->Status }}
-                                </span>
-                            </td>
-                            <td>{{ $order->ApprovedBy }}</td>
-                            <td>
-                                <div class="btn-group" role="group">
-                                    <a href="#" class="btn btn-info btn-sm" title="View">
-                                        <i class="fas fa-eye"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-warning btn-sm" title="Edit">
-                                        <i class="fas fa-edit"></i>
-                                    </a>
-                                    <form action="#" method="POST" style="display:inline;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-danger btn-sm" title="Delete" onclick="return confirm('Are you sure?')">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
-                                    </form>
-                                </div>
-                            </td>
+                            <td>{{ $data->firstItem() + $loop->index }}</td>
+                            <td>{{ $d->TrxDate }}</td>
+                            <td>{{ $d->SettleDate }}</td>
+                            <td>{{ $d->BorS }}</td>
+                            <td>{{ $d->Client }}</td>
+                            <td>{{ $d->Obligasi}}</td>
+                            <td>{{ $d->Nominal}}</td>
+                            <td>{{ $d->Harga}}</td>
+                            <td>{{ $d->Amount}}</td>
+                            <td>{{ $d->Status}}</td>
+                            <td>{{ $d->ApprovedBy}}</td>
+                            <td>{{ $d->ApprovedDate}}</td>
+                            <td><a href="#" class="btn btn-info btn-sm">Edit</a></td>
+                        <td>
+                            <form action="#" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
                         </tr>
                         @endforeach
                     </tbody>
