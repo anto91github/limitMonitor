@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\WindowApproveController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,6 +56,16 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
             Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
         });
+
+        /**
+         * Forms
+         */
+        Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('index');
+
+        /**
+         * Windows
+         */
+        Route::get('/windowApprove', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('windowApprove.index');
 
         Route::group(['prefix' => 'window'], function() {
             Route::get('/',[App\Http\Controllers\WindowOrderController::class, 'index'])->name('window.index');
