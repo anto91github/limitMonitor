@@ -61,6 +61,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          * Forms
          */
         Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('formclientlimit.index');
+        Route::get('/form-client-limit-search', [App\Http\Controllers\ClientLimitController::class,'autocomplete'])->name('formclientlimit.autocomplete');
         Route::post('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'store'])->name('formclientlimit.store');
 
         /**

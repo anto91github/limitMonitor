@@ -15,7 +15,7 @@
                     @include('layouts.includes.messages')
                 </div>
 
-                <form action="{{route('formclientlimit.store')}}" method="POST">
+                <form action="{{ route('formclientlimit.store') }}" method="POST">
                     @csrf
                     <label class="form-label" for="client">Client</label>
                     <input class="form-control" type="text" name="client" id="client" required>
@@ -28,4 +28,34 @@
             </div>
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $('#client').autocomplete({
+                source: function(request, response) {
+                    
+                    $.ajax({
+                        url: "{{ route('formclientlimit.autocomplete') }}",
+                        data: {
+                            query: request.term
+                        },
+                        success: function(data) {
+                            response($.map(data, function(item) {
+                                return {
+                                    label: item.Client,
+                                    value: item.Client,
+                                    credit: item.ClientLimit
+                                }
+                            }))
+                        }
+                    })
+                },
+                select: function(event, ui) {
+                    console.log(ui);
+                    $('#client').val(ui.item.value);
+                    $('#credit').val(ui.item.credit)
+                }
+            })
+
+        })
+    </script>
 @endsection
