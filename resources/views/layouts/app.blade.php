@@ -18,7 +18,7 @@
     @vite('resources/sass/app.scss')
     @stack('after-styles')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
-    <script src="{{ asset('js/jquery-ui/jquery-ui.js') }}"></script>
+    <script src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.css')}}">
 </head>
 

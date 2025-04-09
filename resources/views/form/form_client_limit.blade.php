@@ -32,7 +32,7 @@
         $(document).ready(function() {
             $('#client').autocomplete({
                 source: function(request, response) {
-                    console.log(request);
+                    
                     $.ajax({
                         url: "{{ route('formclientlimit.autocomplete') }}",
                         data: {
@@ -41,7 +41,8 @@
                         success: function(data) {
                             response($.map(data, function(item) {
                                 return {
-                                    client: item.Client,
+                                    label: item.Client,
+                                    value: item.Client,
                                     credit: item.ClientLimit
                                 }
                             }))
@@ -50,8 +51,8 @@
                 },
                 select: function(event, ui) {
                     console.log(ui);
-                    $('#client').val(ui.item.client);
-                    $('$credit').val(ui.item.credit)
+                    $('#client').val(ui.item.value);
+                    $('#credit').val(ui.item.credit)
                 }
             })
 
