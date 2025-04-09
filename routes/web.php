@@ -55,5 +55,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
             Route::patch('/{user}/update', 'UsersController@update')->name('users.update');
             Route::delete('/{user}/delete', 'UsersController@destroy')->name('users.destroy');
         });
+
+        Route::group(['prefix' => 'window'], function() {
+            Route::get('/',[App\Http\Controllers\WindowOrderController::class, 'index'])->name('window.index');
+        });
     });
 });

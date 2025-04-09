@@ -16,6 +16,6 @@ class WindowOrderController extends Controller
     {
         $windowOrders = WindowOrder::latest()->paginate(10);
 
-        return view('window.index', compact('windowOrders'));
+        return view('window.index');
     }
 }
