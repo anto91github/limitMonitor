@@ -32,6 +32,7 @@
         $(document).ready(function() {
             $('#client').autocomplete({
                 source: function(request, response) {
+                    console.log(request);
                     $.ajax({
                         url: "{{ route('formclientlimit.autocomplete') }}",
                         data: {
@@ -48,6 +49,7 @@
                     })
                 },
                 select: function(event, ui) {
+                    console.log(ui);
                     $('#client').val(ui.item.client);
                     $('$credit').val(ui.item.credit)
                 }

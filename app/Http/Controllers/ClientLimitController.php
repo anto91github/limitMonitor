@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ClientLimitRequest;
 use App\Models\ClientLimit;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\Request;
 
 class ClientLimitController extends Controller
 {
@@ -30,7 +30,6 @@ class ClientLimitController extends Controller
 
     public function autocomplete(Request $request)
     {
-        dd($request);
         $search = $request->get('query');
         $data_client = ClientLimit::where('Client', 'LIKE', "%{$search}%")->get();
 
