@@ -18,4 +18,19 @@ class WindowOrderController extends Controller
             ->paginate(10);
         return view('windowOrder/index', ['data' => $data]);
     }
+
+     /**
+     * Delete user data
+     *
+     * @param WindowOrder $WindowOrder
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(WindowOrder $WindowOrder)
+    {
+        $WindowOrder->delete();
+
+        return redirect()->route('windowOrder.index')
+            ->withSuccess(__('Data deleted successfully.'));
+    }
 }
