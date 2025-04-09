@@ -1,0 +1,91 @@
+@extends('layouts.app')
+
+@section('title')
+Window Order
+@endsection
+
+@section('content')
+<div class="bg-light rounded">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Window Order</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Manage Client Orders</h6>
+
+            <div class="mt-2">
+                @include('layouts.includes.messages')
+            </div>
+
+            <div class="mb-2 text-end">
+                <a href="#" class="btn btn-primary btn-sm">Add New Order</a>
+            </div>
+
+            <form action="#" method="GET">
+                @csrf
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" name="pencarian" id="searchInput" placeholder="Keyword" value="{{ request()->input('pencarian') }}">
+                            <button class="input-group-text btn btn-primary">Search</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="col-md-3">
+                        <div class="input-group mb-3">
+                            <label for="datepicker">Date:</label>
+                            <input type="text" class="form-control" id="daterange" placeholder="Pilih rentang tanggal">
+                        </div>
+                    </div> -->
+                </div>                
+            </form>
+
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col" width="3%">No</th>
+                            <th scope="col" >Trx Date</th>
+                            <th scope="col" >Settle Date</th>
+                            <th scope="col" width="5%">B / S</th>
+                            <th scope="col" >Client</th>                        
+                            <th scope="col" >Obligasi</th>
+                            <th scope="col" >Nominal</th>
+                            <th scope="col" >Harga</th>
+                            <th scope="col" >Amount</th>
+                            <th scope="col" >Status</th>
+                            <th scope="col" >Approved By</th>
+                            <th scope="col" >Approved Date</th>
+                            <th scope="col" width="10%" colspan="3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($data as $d)
+                        <tr>
+                            <td>{{ $data->firstItem() + $loop->index }}</td>
+                            <td>{{ $d->TrxDate }}</td>
+                            <td>{{ $d->SettleDate }}</td>
+                            <td>{{ $d->BorS }}</td>
+                            <td>{{ $d->Client }}</td>
+                            <td>{{ $d->Obligasi}}</td>
+                            <td>{{ $d->Nominal}}</td>
+                            <td>{{ $d->Harga}}</td>
+                            <td>{{ $d->Amount}}</td>
+                            <td>{{ $d->Status}}</td>
+                            <td>{{ $d->ApprovedBy}}</td>
+                            <td>{{ $d->ApprovedDate}}</td>
+                            <td><a href="#" class="btn btn-info btn-sm">Edit</a></td>
+                        <td>
+                            <form action="#" method="POST" style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                            </form>
+                        </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

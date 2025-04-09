@@ -31,7 +31,6 @@ Window Approval
                     </div> -->
                 </div>                
             </form>
-
             <table class="table table-striped">
                 <thead>
                     <tr>
@@ -49,26 +48,29 @@ Window Approval
                     </tr>
                 </thead>
                 <tbody>
-                    {{-- @foreach($pepList as $data)
+                    @foreach($data as $d)
                     <tr>
-                        <td>{{ $pepList->firstItem() + $loop->index }}</td>
-                        <td>{{ $data->name }}</td>
-                        <td>{{ $data->nik }}</td>
-                        <td>{{ $data->jabatan }}</td>
-                        <td>{{ $data->instansi }}</td>
-                        <td>{{ $data-> created_at}}</td>
-                        <td><a href="pepCheck/detail/{{$data->id}}" class="btn btn-info btn-sm">Detail</a></td>
+                        <td>{{ $data->firstItem() + $loop->index }}</td>
+                        <td>{{ $d->TrxDate }}</td>
+                        <td>{{ $d->SettleDate }}</td>
+                        <td>{{ $d->BorS }}</td>
+                        <td>{{ $d->Client }}</td>
+                        <td>{{ $d->Obligasi}}</td>
+                        <td>{{ $d->Nominal}}</td>
+                        <td>{{ $d->Harga}}</td>
+                        <td>{{ $d->Amount}}</td>
+                        <td>{{ $d->Status}}</td>
                         <td>
-                            <!-- <a href="pepCheck/delete/{{$data->id}}" class="btn btn-danger btn-sm">Delete</a> -->
-                            <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="{{ $data->id }}">Delete</a>
+                            <!-- <a href="pepCheck/delete/{{$d->id}}" class="btn btn-danger btn-sm">Delete</a> -->
+                            <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="{{ $d->id }}">Delete</a>
 
                         </td>
 
                     </tr>
-                    @endforeach --}}
+                    @endforeach
             </table>
             <div class='my-3 float-end'>
-                {{-- {{$pepList->withQueryString()->links()}} --}}
+                {{$data->withQueryString()->links()}}
             </div>
         </div>
     </div>

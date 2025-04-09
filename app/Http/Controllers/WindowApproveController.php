@@ -9,6 +9,11 @@ class WindowApproveController extends Controller
 {
     public function index() 
     {
-        return view('WindowApprove/index');
+        $data = WindowOrder::orderBy('id', 'desc')
+                            ->where('Status', 'P')
+                            ->paginate(10);
+        return view('WindowApprove/index',[
+            'data' => $data
+        ]);
     }
 }
