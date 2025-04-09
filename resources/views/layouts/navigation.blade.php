@@ -47,4 +47,79 @@
             </li>           
         </ul>
     </li>
+
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
+            </svg>
+            Form
+        </a>
+        <ul class="nav-group-items" style="height: 0px;">
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="#">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                    </svg>
+                    Form Client Limit
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                    </svg>
+                    Form Order
+                </a>
+            </li>          
+        </ul>
+    </li>
+
+    <li class="nav-group" aria-expanded="false">
+        <a class="nav-link nav-group-toggle" href="#">
+            <svg class="nav-icon">
+                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
+            </svg>
+            Data Window
+        </a>
+        <ul class="nav-group-items" style="height: 0px;">
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="#">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
+                    </svg>
+                    Window Order
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                    </svg>
+                    Window Approval
+                </a>
+            </li> 
+            
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                    </svg>
+                    Client Position
+                </a>
+            </li> 
+
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                    </svg>
+                    Client Transaction
+                </a>
+            </li> 
+        </ul>
+    </li>
+
 </ul>
