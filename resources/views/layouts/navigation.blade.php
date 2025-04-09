@@ -94,7 +94,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('windowApprove.index') }}">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('window-approve.index') }}">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
                     </svg>
