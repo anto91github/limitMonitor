@@ -67,7 +67,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::get('/windowApprove', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('windowApprove.index');
 
-        Route::group(['prefix' => 'window'], function() {
+        Route::group(['prefix' => 'window-order'], function() {
             Route::get('/',[App\Http\Controllers\WindowOrderController::class, 'index'])->name('window.index');
         });
     });
