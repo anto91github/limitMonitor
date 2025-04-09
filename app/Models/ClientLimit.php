@@ -9,4 +9,10 @@ class ClientLimit extends Model
 {
     use HasFactory;
     protected $table = 'client_limit';
+
+    protected $fillable = [
+        'Client','ClientLimit'
+    ];
+
+    public $timestamps = false;
 }

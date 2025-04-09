@@ -60,13 +60,14 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         /**
          * Forms
          */
-        Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('index');
+        Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('formclientlimit.index');
+        Route::post('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'store'])->name('formclientlimit.store');
 
         /**
          * Windows
          */
-        Route::group(['prefix' => 'windowApprove'], function() {
-            Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('windowApprove.index');
+        Route::group(['prefix' => 'window-approve'], function() {
+            Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('window-approve.index');
         });
          
 
