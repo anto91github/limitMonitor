@@ -7,10 +7,15 @@ use App\Models\WindowOrder;
 
 class WindowApproveController extends Controller
 {
-    public function index() 
+    public function index(Request $request) 
     {
+        $keyword = $request->pencarian;
         $data = WindowOrder::orderBy('id', 'desc')
                             ->where('Status', 'P')
+                            ->where(function($query) use ($keyword) {
+                                $query->where('Client', 'LIKE', '%'.$keyword.'%')
+                                      ->orWhere('Obligasi', 'LIKE', '%'.$keyword.'%');
+                            })
                             ->paginate(10);
         return view('WindowApprove/index',[
             'data' => $data
