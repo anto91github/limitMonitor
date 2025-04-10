@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\ClientLimitHelper;
 use App\Http\Requests\ClientOrderRequest;
 use App\Models\ClientLimit;
+use App\Models\Holiday;
 use App\Models\WindowOrder;
 use Carbon\Carbon;
 use DateTime;
@@ -29,8 +30,8 @@ class ClientOrderController extends Controller
         $status = 'M';
         $item = ClientLimit::where('Client', $request['client'])->first();
         $limit = ClientLimitHelper::calculateClientLimit($item);
-        $status = $limit['status'] == ''? 'M':'P';
-       
+        $status = $limit['status'] == '' ? 'M' : 'P';
+
         $client_order->create(
             [
                 'TrxDate' => $trx_date,
@@ -63,14 +64,17 @@ class ClientOrderController extends Controller
         return response()->json($sett_date);
     }
 
-
-
     private function get_holiday($date): bool
     {
         $days = new DateTime($date);
         $dayOfWeek = $days->format('w');
 
         if ($dayOfWeek == 6 || $dayOfWeek == 0) {
+            return true;
+        }
+
+        $get_holiday = Holiday::where('tanggal', $date)->first();
+        if ($get_holiday) {
             return true;
         }
 
