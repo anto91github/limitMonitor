@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 class ClientTransactionController extends Controller
 {public function index(Request $request)
     {
+        
         $clientName = $request->input('client_name');
         $fromDate = $request->input('from_date');
         $toDate = $request->input('to_date');

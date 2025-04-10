@@ -27,28 +27,18 @@
                     </div>
                     
                     <div class="col-md-3">
-                        <div class="form-group position-relative">
+                        <div class="form-group">
                             <label for="from_date">Dari Tanggal</label>
                             <input type="date" name="from_date" id="from_date" class="form-control" 
-                                   value="{{ request('from_date') }}">
-                            @if(request('from_date'))
-                                <span class="clear-input" onclick="clearInput('from_date')">
-                                    <i class="fas fa-times"></i>
-                                </span>
-                            @endif
+                                   value="{{ request('from_date') }}" max="{{ \Carbon\Carbon::yesterday()->format('Y-m-d') }}">
                         </div>
                     </div>
                     
                     <div class="col-md-3">
-                        <div class="form-group position-relative">
+                        <div class="form-group">
                             <label for="to_date">Sampai Tanggal</label>
                             <input type="date" name="to_date" id="to_date" class="form-control" 
-                                   value="{{ request('to_date') }}">
-                            @if(request('to_date'))
-                                <span class="clear-input" onclick="clearInput('to_date')">
-                                    <i class="fas fa-times"></i>
-                                </span>
-                            @endif
+                                   value="{{ request('to_date') }}" max="{{ \Carbon\Carbon::yesterday()->format('Y-m-d') }}">
                         </div>
                     </div>
                     
