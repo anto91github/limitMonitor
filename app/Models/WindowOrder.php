@@ -11,7 +11,13 @@ class WindowOrder extends Model
 
     protected $table = 'client_order';
     protected $primaryKey = 'Id'; 
+
+    protected $fillable = [
+        'Id','TrxDate', 'SettleDate', 'BorS', 'Client', 'Obligasi', 'Nominal', 'Harga',
+        'Amount', 'Uid', 'Status', 'ApprovedBy', 'ApprovedDate', 'Note', 'OverLimit', 'CreatedAt'
+    ];
     
     // Nonaktifkan timestamps jika tidak ada kolom created_at/updated_at
     public $timestamps = false;
+
 }
