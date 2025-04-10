@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\ClientLimitHelper;
 use App\Http\Requests\ClientOrderRequest;
+use App\Models\ClientLimit;
 use App\Models\WindowOrder;
 use Carbon\Carbon;
 use DateTime;
@@ -25,7 +27,10 @@ class ClientOrderController extends Controller
         // you should create a generated random password and email it to the user
         $trx_date = date('Y-m-d');
         $status = 'M';
-
+        $item = ClientLimit::where('Client', $request['client'])->first();
+        $limit = ClientLimitHelper::calculateClientLimit($item);
+        $status = $limit['status'] == ''? 'M':'P';
+       
         $client_order->create(
             [
                 'TrxDate' => $trx_date,

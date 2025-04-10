@@ -66,7 +66,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="#">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="/form-client-order">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
                     </svg>
