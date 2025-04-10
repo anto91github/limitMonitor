@@ -84,6 +84,9 @@ Window Order
                         @endforeach
                     </tbody>
                 </table>
+                <div class='my-3 float-end'>
+                    {{$data->withQueryString()->links()}}
+                </div>
             </div>
         </div>
     </div>
