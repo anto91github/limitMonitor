@@ -40,38 +40,22 @@ Client Position
                         <tr>
                             <th>Client</th>
                             <th>Credit Limit</th>
-                            <th>Used</th>
-                            <th>Available</th>
+                            <th>Used Limit</th>
+                            <th>Available Limit</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse($clientLimits as $limit)
-                        @php
-                            $isOverLimit = $limit->usedLimit > $limit->clientLimit;
-                        @endphp
+                        @foreach($clientLimits as $limit)
                         <tr>
-                            <td>{{ $limit->client }}</td>
-                            <td class="text-right">{{ number_format($limit->clientLimit, 2) }}</td>
-                            <td class="text-right {{ $isOverLimit ? 'text-danger font-weight-bold' : ($limit->usedLimit > 0 ? 'text-warning' : '') }}">
-                                {{ number_format($limit->usedLimit, 2) }}
-                                @if($isOverLimit)
-                                    <span class="badge badge-danger">OVER LIMIT</span>
-                                @endif
-                            </td>
-                            <td class="text-right {{ $isOverLimit ? 'text-danger' : ($limit->remainingLimit < ($limit->clientLimit * 0.1) ? 'text-warning' : 'text-success') }}">
-                                {{ number_format($limit->remainingLimit, 2) }}
-                                @if($isOverLimit)
-                                    <span class="badge badge-danger">EXCEEDED</span>
-                                @elseif($limit->remainingLimit < ($limit->clientLimit * 0.1))
-                                    <span class="badge badge-warning">LOW</span>
-                                @endif
+                            <td>{{ $limit['nama_client'] }}</td>
+                            <td>{{ number_format($limit['credit_limit'], 2) }}</td>
+                            <td>{{ number_format($limit['used_limit'], 2) }}</td>
+                            <td>{{ number_format($limit['available_limit'], 2) }}</td>
+                            <td class="{{ $limit['status'] == 'Limit Exceeded' ? 'text-danger' : '' }}">
+                                {{ $limit['status'] }}
                             </td>
                         </tr>
-                    @empty
-                        <tr>
-                            <td colspan="4" class="text-center">No client data found</td>
-                        </tr>
-                    @endforelse
+                    @endforeach
                 </tbody>
             </table>
             <div class="d-flex justify-content-center">
