@@ -19,10 +19,25 @@ class ClientLimitController extends Controller
 
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
-        $client_limit->create([
-            'Client' => $request['client'],
-            'ClientLimit' => $request['credit']
-        ]);
+
+
+        $data_exists = $client_limit->where('Client', $request['client'])->first();
+
+        if ($data_exists) {
+            $data_exists->ClientLimit = $request['credit'];
+            $data_exists->save();
+            
+        } else {
+            $client_limit->create(
+                [
+                    'Client' => $request['client'],
+                    'ClientLimit' => $request['credit']
+                ]
+            );
+        }
+
+
+
 
         return redirect()->route('formclientlimit.index')
             ->withSuccess(__('Created successfully.'));
