@@ -15,10 +15,6 @@ Window Order
                 @include('layouts.includes.messages')
             </div>
 
-            <div class="mb-2 text-end">
-                <a href="#" class="btn btn-primary btn-sm">Add New Order</a>
-            </div>
-
             <form action="#" method="GET">
                 @csrf
                 <div class="row">
@@ -54,7 +50,7 @@ Window Order
                             <th scope="col" >Status</th>
                             <th scope="col" >Approved By</th>
                             <th scope="col" >Approved Date</th>
-                            <th scope="col" width="10%" colspan="3">Action</th>
+                
                         </tr>
                     </thead>
                     <tbody>
@@ -69,17 +65,17 @@ Window Order
                             <td>{{ $d->Nominal}}</td>
                             <td>{{ $d->Harga}}</td>
                             <td>{{ $d->Amount}}</td>
-                            <td>{{ $d->Status}}</td>
+                            <td>
+                                @if($d->Status == 'P')
+                                    <span class="badge badge-primary">Pending</span>
+                                @elseif($d->Status == 'M')
+                                    <span class="badge badge-success">Completed</span>
+                                @elseif($d->Status == 'R')
+                                    <span class="badge badge-danger">Rejected</span>
+                                @endif
+                            </td>
                             <td>{{ $d->ApprovedBy}}</td>
                             <td>{{ $d->ApprovedDate}}</td>
-                            <td><a href="#" class="btn btn-info btn-sm">Edit</a></td>
-                        <td>
-                            <form action="{{ route('windowOrder.destroy', $d->id) }}" method="POST" style="display:inline;">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                            </form>
-                        </td>
                         </tr>
                         @endforeach
                     </tbody>

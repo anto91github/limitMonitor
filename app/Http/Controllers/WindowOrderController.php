@@ -15,11 +15,12 @@ class WindowOrderController extends Controller
     public function index()
     {
         $data = WindowOrder::orderBy('id', 'desc')
+            ->whereDate('TrxDate', today())
             ->paginate(10);
         return view('windowOrder/index', ['data' => $data]);
     }
 
-     /**
+    /**
      * Delete user data
      *
      * @param WindowOrder $WindowOrder
