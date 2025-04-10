@@ -21,13 +21,13 @@ class ClientLimitController extends Controller
         // you should create a generated random password and email it to the user
 
 
-        $data_exists = $client_limit->where('Client', $request['client'])->first();
+        $data_exists = $client_limit->where('Client', $request['client'])->update(
+            [
+                'ClientLimit' => $request['credit']
+            ]
+        );
 
-        if ($data_exists) {
-            $data_exists->ClientLimit = $request['credit'];
-            $data_exists->save();
-            
-        } else {
+        if (!$data_exists) {
             $client_limit->create(
                 [
                     'Client' => $request['client'],
@@ -35,8 +35,6 @@ class ClientLimitController extends Controller
                 ]
             );
         }
-
-
 
 
         return redirect()->route('formclientlimit.index')

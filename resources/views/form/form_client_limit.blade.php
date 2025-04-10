@@ -26,13 +26,14 @@
                     <button class="btn btn-primary d-flex" type="submit">Apply</button>
                 </form>
             </div>
+            <br>
         </div>
     </div>
     <script>
         $(document).ready(function() {
             $('#client').autocomplete({
                 source: function(request, response) {
-                    
+
                     $.ajax({
                         url: "{{ route('formclientlimit.autocomplete') }}",
                         data: {
@@ -50,12 +51,10 @@
                     })
                 },
                 select: function(event, ui) {
-                    console.log(ui);
                     $('#client').val(ui.item.value);
                     $('#credit').val(ui.item.credit)
                 }
             })
-
         })
     </script>
 @endsection

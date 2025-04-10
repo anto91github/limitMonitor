@@ -64,6 +64,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/form-client-limit-search', [App\Http\Controllers\ClientLimitController::class,'autocomplete'])->name('formclientlimit.autocomplete');
         Route::post('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'store'])->name('formclientlimit.store');
 
+        Route::get('/form-client-order', [App\Http\Controllers\ClientOrderController::class,'index'])->name('formclientorder.index');
+        Route::get('/form-client-order-getsett', [App\Http\Controllers\ClientOrderController::class,'getsett'])->name('formclientorder.getsett');
+        Route::post('/form-client-order', [App\Http\Controllers\ClientOrderController::class,'store'])->name('formclientorder.store');
         /**
          * Windows
          */
