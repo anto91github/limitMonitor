@@ -69,6 +69,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          */
         Route::group(['prefix' => 'window-approve'], function() {
             Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('window-approve.index');
+            Route::patch('/update/{orderId}', [WindowApproveController::class, 'changeStatus']);
         });
          
 
