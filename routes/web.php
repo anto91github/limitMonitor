@@ -78,6 +78,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
 
         Route::group(['prefix' => 'window-order'], function() {
             Route::get('/',[App\Http\Controllers\WindowOrderController::class, 'index'])->name('window.index');
+            Route::delete('/delete/window-order', 'WindowOrderController@destroy')->name('windowOrder.destroy');
         });
+
+        Route::get('/client-position', [App\Http\Controllers\ClientPositionController::class, 'index'])->name('client-position.index');
     });
 });

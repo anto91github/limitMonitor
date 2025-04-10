@@ -74,7 +74,7 @@ Window Order
                             <td>{{ $d->ApprovedDate}}</td>
                             <td><a href="#" class="btn btn-info btn-sm">Edit</a></td>
                         <td>
-                            <form action="#" method="POST" style="display:inline;">
+                            <form action="{{ route('windowOrder.destroy', $d->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
@@ -84,6 +84,9 @@ Window Order
                         @endforeach
                     </tbody>
                 </table>
+                <div class='my-3 float-end'>
+                    {{$data->withQueryString()->links()}}
+                </div>
             </div>
         </div>
     </div>
