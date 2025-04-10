@@ -10,8 +10,11 @@ class WindowApproveController extends Controller
     public function index(Request $request) 
     {
         $keyword = $request->pencarian;
+        $today = now()->toDateString();
+
         $data = WindowOrder::orderBy('id', 'desc')
                             ->where('Status', 'P')
+                            ->whereDate('TrxDate', $today)
                             ->where(function($query) use ($keyword) {
                                 $query->where('Client', 'LIKE', '%'.$keyword.'%')
                                       ->orWhere('Obligasi', 'LIKE', '%'.$keyword.'%');
