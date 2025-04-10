@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AuditTrailHelper;
 use App\Http\Requests\ClientLimitRequest;
 use App\Models\ClientLimit;
 use Illuminate\Http\Request;
@@ -19,7 +20,10 @@ class ClientLimitController extends Controller
 
         //For demo purposes only. When creating user or inviting a user
         // you should create a generated random password and email it to the user
-
+        AuditTrailHelper::add_log('Edit', [
+            'Client' => $request['client'],
+            'ClientLimit' => $request['credit']
+        ]);
 
         $data_exists = $client_limit->where('Client', $request['client'])->update(
             [
@@ -34,11 +38,18 @@ class ClientLimitController extends Controller
                     'ClientLimit' => $request['credit']
                 ]
             );
+
+            return redirect()->route('formclientlimit.index')
+            ->withSuccess(__('Created successfully.'));
+        }else{
+            return redirect()->route('formclientlimit.index')
+            ->withSuccess(__('Update success.'));
         }
 
 
-        return redirect()->route('formclientlimit.index')
-            ->withSuccess(__('Created successfully.'));
+
+
+      
     }
 
     public function autocomplete(Request $request)
