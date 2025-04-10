@@ -13,6 +13,10 @@ Window Approval
             <h5 class="card-title">Window Approval</h5>
             <h6 class="card-subtitle mb-2 text-muted"> List</h6>
 
+            <div class="mt-2">
+                @include('layouts.includes.messages')
+            </div>
+
             <form action="#" method="GET">
                 @csrf
                 <div class="row">
@@ -44,7 +48,7 @@ Window Approval
                         <th scope="col" >Harga</th>
                         <th scope="col" >Amount</th>
                         <th scope="col" >Status</th>
-                        <th scope="col" width="10%" colspan="3">Action</th>
+                        <th scope="col" width="15%" colspan="3">Action</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,8 +65,50 @@ Window Approval
                         <td>{{ $d->Amount}}</td>
                         <td>{{ $d->Status}}</td>
                         <td>
-                            <!-- <a href="pepCheck/delete/{{$d->id}}" class="btn btn-danger btn-sm">Delete</a> -->
-                            <a href="#" class="btn btn-danger btn-sm btn-delete" data-id="{{ $d->id }}">Delete</a>
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeStatusModal" data-id="{{ $d->Id }}">
+                                Update Status
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="changeStatusModal{{ $d->id }}" tabindex="-1" aria-labelledby="changeStatusModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="changeStatusModalLabel">Update Status</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form id="inputForm" action="window-approve/update/{{ $d->Id }}" method="POST">
+                                            @csrf
+                                            @method('PATCH')
+                                            {{-- <input type="text" name="orderId" id="orderId"> --}}
+                                            <div class="form-group">
+                                                <label for="status">Status :</label>
+                                                <select name="newStatus" id="newStatus" class="form-select">
+                                                    <option value="M">M</option>
+                                                    <option value="P" selected>P</option>
+                                                    <option value="R">R</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="approveNote">Note :</label>
+                                                
+                                                <textarea class="form-control" id="approveNote" rows="4" name="approveNote"></textarea>
+                                            </div>
+
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                                </div>
+                            </div>
+
+                            
 
                         </td>
 
