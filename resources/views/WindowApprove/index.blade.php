@@ -63,7 +63,15 @@ Window Approval
                         <td>{{ $d->Nominal}}</td>
                         <td>{{ $d->Harga}}</td>
                         <td>{{ $d->Amount}}</td>
-                        <td>{{ $d->Status}}</td>
+                        <td>
+                            @if($d->Status == 'P')
+                                Pending
+                            @elseif($d->Status == 'M')
+                                Approve
+                            @else
+                                Reject
+                            @endif
+                        </td>
                         <td>
                             <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeStatusModal" data-id="{{ $d->Id }}">
                                 Update Status
@@ -85,9 +93,8 @@ Window Approval
                                             <div class="form-group">
                                                 <label for="status">Status :</label>
                                                 <select name="newStatus" id="newStatus" class="form-select">
-                                                    <option value="M">M</option>
-                                                    <option value="P" selected>P</option>
-                                                    <option value="R">R</option>
+                                                    <option value="M">Approve</option>
+                                                    <option value="R">Reject</option>
                                                 </select>
                                             </div>
                                             <div class="form-group">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AuditTrailHelper;
 use App\Http\Requests\ClientLimitRequest;
 use App\Models\ClientLimit;
 use Illuminate\Http\Request;
@@ -34,11 +35,21 @@ class ClientLimitController extends Controller
                     'ClientLimit' => $request['credit']
                 ]
             );
+            AuditTrailHelper::add_log('Input', [
+                'Client' => $request['client'],
+                'ClientLimit' => $request['credit']
+            ]);
+            return redirect()->route('formclientlimit.index')
+                ->withSuccess(__('Created successfully.'));
+        } else {
+            AuditTrailHelper::add_log('Edit', [
+                'Client' => $request['client'],
+                'ClientLimit' => $request['credit']
+            ]);
+
+            return redirect()->route('formclientlimit.index')
+                ->withSuccess(__('Update success.'));
         }
-
-
-        return redirect()->route('formclientlimit.index')
-            ->withSuccess(__('Created successfully.'));
     }
 
     public function autocomplete(Request $request)

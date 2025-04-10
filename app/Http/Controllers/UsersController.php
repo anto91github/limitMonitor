@@ -20,7 +20,7 @@ class UsersController extends Controller
      */
     public function index()
     {
-        $users = User::latest()->paginate(10);
+        $users = User::with('role')->orderBy('id','ASC')->paginate(10);
 
         return view('users.index', compact('users'));
     }
