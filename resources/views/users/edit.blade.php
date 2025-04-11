@@ -37,7 +37,9 @@ Edit User
                             type="text" 
                             class="form-control" 
                             name="uid" 
-                            placeholder="UID" required>
+                            placeholder="UID" required 
+                            {{ $logedin_user_data->role_id != 3 ? 'readonly' : '' }}
+                            >
     
                         @if ($errors->has('uid'))
                             <span class="text-danger text-left">{{ $errors->first('uid') }}</span>
@@ -62,7 +64,7 @@ Edit User
                             placeholder="Confirm Password">
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" style="{{ $logedin_user_data->role_id != 3 ? 'display: none;' : '' }}">
                         <label for="role" class="form-label">Role</label>
                         <select name="role" id="role" class="form-select" required>
                             @foreach($roleData as $data)
@@ -73,17 +75,17 @@ Edit User
                         </select>
                     </div>
 
-                    <div class="mb-3">
+                    <div class="mb-3" style="{{ $logedin_user_data->role_id != 3 ? 'display: none;' : '' }}">
                         <label for="status" class="form-label">Is Active</label>
                         <br/>
                         <label class="switch">
-                            <input type="checkbox" class="toggle-active" name="is_active" {{ $user->status == 1 ? 'checked' : '' }}>
+                            <input type="checkbox" class="toggle-active" name="is_active" {{ $user->status == 1 ? 'checked' : '' }} {{ $user->role_id != 3 ? 'readonly' : '' }}>
                             <span class="slider round"></span>
                         </label>
                     </div>
 
                     <button type="submit" class="btn btn-primary">Update user</button>
-                    <a href="{{ route('users.index') }}" class="btn btn-default">Cancel</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-default">Cancel</a>
                 </form>
             </div>
         </div>

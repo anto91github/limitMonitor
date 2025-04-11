@@ -10,6 +10,7 @@ use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Support\Facades\Auth;
 
 /**
  *
@@ -93,11 +94,13 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roleData = RolesModel::all();
+        $logedin_user_data = Auth::user();
 
         AuditTrailHelper::add_log('View', '/users/'. $user['id'].'/edit');
 
         return view('users.edit', [
             'user' => $user,
+            'logedin_user_data' => $logedin_user_data,
             'userRole' => $user->roles->pluck('name')->toArray(),
             'roleData' => $roleData,
             'roles' => Role::latest()->get()
@@ -115,7 +118,7 @@ class UsersController extends Controller
     public function update(User $user, ProfileUpdateRequest $request)
     {
         $data = $request->validated();
-
+        $logedin_role_id = Auth::user()->role_id;
         $status = $request->has('is_active') ? 1 : 0;
 
          // Hanya update password jika diisi
@@ -137,8 +140,16 @@ class UsersController extends Controller
 
         // $user->syncRoles($request->get('role'));
 
-        return redirect()->route('users.index')
-            ->withSuccess(__('User updated successfully.'));
+        if($logedin_role_id == '3'){
+            return redirect()->route('users.index')
+                ->withSuccess(__('User updated successfully.'));
+        } else {
+            return redirect()->route('dashboard')
+                 ->withSuccess(__('User  updated successfully.'));
+        }
+        
+    
+        
     }
 
     /**
