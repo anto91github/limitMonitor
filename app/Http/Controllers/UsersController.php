@@ -94,12 +94,7 @@ class UsersController extends Controller
     {
         $roleData = RolesModel::all();
 
-        AuditTrailHelper::add_log('Edit', [
-            'user' => $user,
-            'userRole' => $user->roles->pluck('name')->toArray(),
-            'roleData' => $roleData,
-            'roles' => Role::latest()->get()
-        ]);
+        AuditTrailHelper::add_log('View', '/users/'. $user['id'].'/edit');
 
         return view('users.edit', [
             'user' => $user,
