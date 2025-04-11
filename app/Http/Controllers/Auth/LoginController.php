@@ -49,7 +49,7 @@ class LoginController extends Controller
 
     protected function attemptLogin(Request $request)
     {
-        return $this->guard()->attempt(
+        $loginSuccessful = $this->guard()->attempt(
             [
                 'email' => $request->email,
                 'password' => $request->password,
@@ -57,6 +57,15 @@ class LoginController extends Controller
             ],
             $request->filled('remember')
         );
+    
+        // Cek apakah login berhasil
+        if ($loginSuccessful) {
+            // Logika tambahan jika login berhasil
+        } else {
+            // Logika tambahan jika login gagal
+        }
+
+        return $loginSuccessful;
     }
 
     protected function sendFailedLoginResponse(Request $request)
