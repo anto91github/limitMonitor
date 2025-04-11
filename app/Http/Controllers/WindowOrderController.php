@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\WindowOrder;
+use Illuminate\Http\Request;
+use App\Helpers\AuditTrailHelper;
 
 class WindowOrderController extends Controller
 {
@@ -15,11 +16,15 @@ class WindowOrderController extends Controller
     public function index()
     {
         $data = WindowOrder::orderBy('id', 'desc')
+            ->whereDate('TrxDate', today())
             ->paginate(10);
+
+        AuditTrailHelper::add_log('View', '/window-order');
+
         return view('windowOrder/index', ['data' => $data]);
     }
 
-     /**
+    /**
      * Delete user data
      *
      * @param WindowOrder $WindowOrder

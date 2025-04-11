@@ -82,5 +82,6 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         });
 
         Route::get('/client-position', [App\Http\Controllers\ClientPositionController::class, 'index'])->name('client-position.index');
+        Route::get('/client-transactions', [App\Http\Controllers\ClientTransactionController::class, 'index'])->name('client.transactions');
     });
 });
