@@ -3,10 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Role as RolesModel;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use App\Helpers\AuditTrailHelper;
+use App\Models\Role as RolesModel;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\ProfileUpdateRequest;
 
@@ -57,6 +58,13 @@ class UsersController extends Controller
             'status' => $status
         ]));
 
+        AuditTrailHelper::add_log('Input', [
+            'password' => '',
+            'uid' => $request->uid,
+            'role_id' => $request->role,
+            'status' => $status
+        ]);
+
         return redirect()->route('users.index')
             ->withSuccess(__('User created successfully.'));
     }
@@ -85,6 +93,13 @@ class UsersController extends Controller
     public function edit(User $user)
     {
         $roleData = RolesModel::all();
+
+        AuditTrailHelper::add_log('Edit', [
+            'user' => $user,
+            'userRole' => $user->roles->pluck('name')->toArray(),
+            'roleData' => $roleData,
+            'roles' => Role::latest()->get()
+        ]);
 
         return view('users.edit', [
             'user' => $user,
@@ -120,6 +135,8 @@ class UsersController extends Controller
             'status' => $status,
             'role_id' => $request->role,
         ]);
+
+        AuditTrailHelper::add_log('Edit', $dataToUpdate);
 
         $user->update($dataToUpdate);
 

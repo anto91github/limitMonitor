@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Helpers\AuditTrailHelper;
+use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -74,5 +76,11 @@ class LoginController extends Controller
         throw ValidationException::withMessages([
             'email' => [trans('auth.failed')],
         ]);
+    }
+
+    public function logout(Request $request) {
+         AuditTrailHelper::add_log('Logout', '');
+         Auth::logout();
+         return redirect('/login');
     }
 }
