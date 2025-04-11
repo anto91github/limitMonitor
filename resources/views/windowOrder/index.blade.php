@@ -15,7 +15,7 @@
                     @include('layouts.includes.messages')
                 </div>
 
-                <form action="#" method="GET">
+                <form action="{{ route('window.index') }}" method="GET">
                     @csrf
                     <div class="row">
                         <div class="col-md-5">
