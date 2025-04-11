@@ -60,9 +60,9 @@ class LoginController extends Controller
     
         // Cek apakah login berhasil
         if ($loginSuccessful) {
-            // Logika tambahan jika login berhasil
+            AuditTrailHelper::add_log('Login', '');
         } else {
-            // Logika tambahan jika login gagal
+            AuditTrailHelper::add_log('Other', 'Failed Login '.$request->email);
         }
 
         return $loginSuccessful;

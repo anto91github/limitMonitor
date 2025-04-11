@@ -10,7 +10,7 @@ final class AuditTrailHelper
 {
     public static function add_log($type, $msg_log)
     {
-        $uid = Auth::user()->uid;
+        $uid = Auth::user()->uid??'';
         $ip = Request::ip();
         $log = '';
         $datalog = '';
