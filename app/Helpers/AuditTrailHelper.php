@@ -5,7 +5,6 @@ namespace App\Helpers;
 use App\Models\AuditTrail;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
-use PhpParser\Node\Stmt\Case_;
 
 final class AuditTrailHelper
 {
@@ -15,12 +14,15 @@ final class AuditTrailHelper
         $ip = Request::ip();
         $log = '';
         $datalog = '';
-       
-        foreach ($msg_log as $key => $value) {
-            $datalog .= $key . ' : ' . $value.', ';
+
+        if (is_array($msg_log)) {
+            foreach ($msg_log as $key => $value) {
+                $datalog .= $key . ' : ' . $value . ', ';
+            }
         }
-        
-       
+
+
+
         switch ($type) {
             case 'Insert':
                 $log = 'Insert data ' . $datalog;
@@ -43,13 +45,10 @@ final class AuditTrailHelper
                 break;
         }
 
-        dd($log);
-        exit;
-
         AuditTrail::create([
             'Uid' => $uid,
             'Ip' => $ip,
-            'Log' => $msg_log
+            'Log' => $log
         ]);
     }
 }

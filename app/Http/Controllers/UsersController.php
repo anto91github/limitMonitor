@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Role as RolesModel;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Requests\StoreUserRequest;
@@ -32,7 +34,8 @@ class UsersController extends Controller
      */
     public function create()
     {
-        return view('users.create');
+        $roleData = RolesModel::all();
+        return view('users.create', ['roleData' => $roleData]);
     }
 
     /**
@@ -45,10 +48,13 @@ class UsersController extends Controller
      */
     public function store(User $user, StoreUserRequest $request)
     {
-        //For demo purposes only. When creating user or inviting a user
-        // you should create a generated random password and email it to the user
+        $status = $request->has('is_active') ? 1 : 0;
+
         $user->create(array_merge($request->validated(), [
-            'password' => 'test'
+            'password' => Hash::make($request->password),
+            'uid' => $request->uid,
+            'role_id' => $request->role,
+            'status' => $status
         ]));
 
         return redirect()->route('users.index')
@@ -78,9 +84,12 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
+        $roleData = RolesModel::all();
+
         return view('users.edit', [
             'user' => $user,
             'userRole' => $user->roles->pluck('name')->toArray(),
+            'roleData' => $roleData,
             'roles' => Role::latest()->get()
         ]);
     }
@@ -95,9 +104,26 @@ class UsersController extends Controller
      */
     public function update(User $user, ProfileUpdateRequest $request)
     {
-        $user->update($request->validated());
+        $data = $request->validated();
 
-        $user->syncRoles($request->get('role'));
+        $status = $request->has('is_active') ? 1 : 0;
+
+         // Hanya update password jika diisi
+         if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->password); // Hash password
+        } else {
+            // Jika password tidak diisi, hapus key password dari data
+            unset($data['password']);
+        }
+
+        $dataToUpdate = array_merge($data, [
+            'status' => $status,
+            'role_id' => $request->role,
+        ]);
+
+        $user->update($dataToUpdate);
+
+        // $user->syncRoles($request->get('role'));
 
         return redirect()->route('users.index')
             ->withSuccess(__('User updated successfully.'));

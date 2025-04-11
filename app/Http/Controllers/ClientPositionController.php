@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AuditTrailHelper;
 use Illuminate\Http\Request;
 use App\Models\ClientLimit;
 use App\Helpers\ClientLimitHelper;
@@ -26,6 +27,8 @@ class ClientPositionController extends Controller
             request()->input('page', 1),
             ['path' => request()->url(), 'query' => request()->query()]
         );
+
+        AuditTrailHelper::add_log('View', '/client-position');
 
         return view('clientPosition.index', ['clientLimits' => $paginated]);
     }

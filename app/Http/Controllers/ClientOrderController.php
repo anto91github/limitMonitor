@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Helpers\AuditTrailHelper;
 use App\Helpers\ClientLimitHelper;
 use App\Http\Requests\ClientOrderRequest;
 use App\Models\ClientLimit;
@@ -18,6 +19,8 @@ class ClientOrderController extends Controller
 {
     public function index()
     {
+        AuditTrailHelper::add_log('View', '/form_client_order');
+
         return view('/form/form_client_order');
     }
 
@@ -47,6 +50,21 @@ class ClientOrderController extends Controller
                 'CreatedAt' => Carbon::now()
             ]
         );
+
+
+        AuditTrailHelper::add_log('Input', [
+            'TrxDate' => $trx_date,
+            'SettleDate' => $request['sett_date'],
+            'BorS' => $request['bors'],
+            'Client' => $request['client'],
+            'Obligasi' => $request['obligasi'],
+            'Nominal' => str_replace(',', "", $request['nominal']),
+            'Harga' => $request['harga'],
+            'Amount' => str_replace(',', "", $request['amount']),
+            'Uid' => Auth::user()->uid,
+            'Status' => $status,
+            'CreatedAt' => Carbon::now()
+        ]);
 
         return redirect()->route('formclientorder.index')
             ->withSuccess(__('Created successfully.'));

@@ -38,6 +38,18 @@ Create User
                     @endif
                 </div>
                 <div class="mb-3">
+                    <label for="uid" class="form-label">UID</label>
+                    <input value="{{ old('uid') }}" 
+                        type="text" 
+                        class="form-control" 
+                        name="uid" 
+                        placeholder="UID" required>
+
+                    @if ($errors->has('uid'))
+                        <span class="text-danger text-left">{{ $errors->first('uid') }}</span>
+                    @endif
+                </div>
+                <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
                         <input 
                             type="password" 
@@ -54,6 +66,15 @@ Create User
                         class="form-control" 
                         name="confirm_password" 
                         placeholder="Confirm Password" required>
+                </div>
+
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <select name="role" id="role" class="form-select" required>
+                        @foreach($roleData as $data)
+                            <option value={{$data->id}}> {{$data->name}} </option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="mb-3">
