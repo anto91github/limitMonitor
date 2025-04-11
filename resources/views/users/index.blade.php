@@ -23,32 +23,42 @@ User List
                 <thead>
                     <tr>
                         <th scope="col" width="1%">#</th>
-                        <th scope="col" width="15%">Name</th>
-                        <th scope="col">Email</th>
-                        <th scope="col" width="10%">Username</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>                        
                         <th scope="col" width="10%">Roles</th>
-                        <th scope="col" width="1%" colspan="3"></th>
+                        <th scope="col">Status</th>
+                        <th scope="col" width="5%"> Action</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($users as $user)
                     <tr>
-                        <th scope="row">{{ $user->id }}</th>
+                        <th scope="row">{{ $users->firstItem() + $loop->index }}</th>
                         <td>{{ $user->name }}</td>
-                        <td>{{ $user->email }}</td>
-                        <td>{{ $user->username }}</td>                        
+                        <td>{{ $user->email }}</td>                      
                         <td>
                             {{ $user->role ? $user->role->name : 'No Role' }}
                         </td>                        
-                        <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">Show</a></td>
-                        <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a></td>
                         <td>
+                            @if($user->status == 1)
+                                <span style="background-color: #c9ffdc !important; padding: 4px 8px; border-radius: 5px; color: #11bc74 !important;"> 
+                                    Aktif 
+                                </span>
+                            @else
+                                <span style="background-color:rgb(243, 170, 165) !important; padding: 4px 8px; border-radius: 5px; color:rgb(245, 3, 3) !important;"> 
+                                    Non Aktif 
+                                </span>
+                            @endif                            
+                        </td>
+                        {{-- <td><a href="{{ route('users.show', $user->id) }}" class="btn btn-warning btn-sm">Show</a></td> --}}
+                        <td><a href="{{ route('users.edit', $user->id) }}" class="btn btn-info btn-sm">Edit</a></td>
+                        {{-- <td>
                             <form action="{{ route('users.destroy', $user->id) }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm">Delete</button>
                             </form>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                 </tbody>

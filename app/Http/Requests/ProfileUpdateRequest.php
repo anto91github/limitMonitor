@@ -25,11 +25,15 @@ class ProfileUpdateRequest extends FormRequest
     {
         // Let's get the route param by name to get the User object value
         $user = request()->route('user');
+        $userId = $this->user->id;
 
         return [
-            'name' => 'required',
-            'email' => 'required|email:rfc,dns|unique:users,email,'.$user->id,
-            'username' => 'required|unique:users,username,'.$user->id,
+           'name' => 'required',
+           'uid' => 'required|unique:users,uid,' . $userId,
+           'email' => 'required|email:rfc,dns|unique:users,email,' . $userId,
+           //  'username' => 'required|unique:users,username',
+           'password' => 'nullable|min:5|confirmed',
+           'confirm_password' => 'nullable|min:5|confirmed',
         ];
     }
 }
