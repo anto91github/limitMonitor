@@ -32,8 +32,8 @@ class ProfileUpdateRequest extends FormRequest
            'uid' => 'required|unique:users,uid,' . $userId,
            'email' => 'required|email:rfc,dns|unique:users,email,' . $userId,
            //  'username' => 'required|unique:users,username',
-           'password' => 'nullable|min:5|confirmed',
-           'confirm_password' => 'nullable|min:5|confirmed',
+           'password' => 'nullable|min:5',
+           'confirm_password' => 'nullable|same:password',
         ];
     }
 }
