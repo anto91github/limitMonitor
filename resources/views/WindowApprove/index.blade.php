@@ -129,5 +129,32 @@ Window Approval
     </div>
 </div>
 
+<script>
+    $(document).ready(function() {
+       $('#searchInput').autocomplete({
+           source: function(request, response) {
+
+               $.ajax({
+                   url: "{{ route('formclientlimit.autocomplete') }}",
+                   data: {
+                       query: request.term
+                   },
+                   success: function(data) {
+                       response($.map(data, function(item) {
+                           return {
+                               label: item.Client,
+                               value: item.Client,
+                               credit: item.ClientLimit
+                           }
+                       }))
+                   }
+               })
+           },
+           select: function(event, ui) {
+               $('#searchInput').val(ui.item.value);
+           }
+       })
+   })
+</script>
 
 @endsection

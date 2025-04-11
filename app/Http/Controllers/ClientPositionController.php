@@ -10,9 +10,15 @@ use DB;
 
 class ClientPositionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+
+        $keyword = $request->pencarian;
+
         $clientLimits = ClientLimit::with('orders')
+            ->where(function ($query) use ($keyword) {
+                $query->where('Client', 'LIKE', '%' . $keyword . '%');
+            })
             ->paginate(10); // atau sesuai kebutuhan
 
         $clientLimits = $clientLimits->getCollection()->map(function ($item) {
