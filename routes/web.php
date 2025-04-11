@@ -39,7 +39,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         /**
          * Role Routes
          */    
-        Route::resource('roles', RolesController::class);
+        Route::resource('roles', RolesController::class)->middleware(['must-it']);
         /**
          * Permission Routes
          */    
@@ -48,7 +48,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          * User Routes
          */
         Route::group(['prefix' => 'users'], function() {
-            Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index');
+            Route::get('/', [App\Http\Controllers\UsersController::class, 'index'])->name('users.index')->middleware(['must-it']);
             Route::get('/create', 'UsersController@create')->name('users.create');
             Route::post('/create', 'UsersController@store')->name('users.store');
             Route::get('/{user}/show', 'UsersController@show')->name('users.show');
@@ -60,18 +60,18 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         /**
          * Forms
          */
-        Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('formclientlimit.index');
+        Route::get('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'index'])->name('formclientlimit.index')->middleware(['must-rm']);
         Route::get('/form-client-limit-search', [App\Http\Controllers\ClientLimitController::class,'autocomplete'])->name('formclientlimit.autocomplete');
         Route::post('/form-client-limit', [App\Http\Controllers\ClientLimitController::class,'store'])->name('formclientlimit.store');
 
-        Route::get('/form-client-order', [App\Http\Controllers\ClientOrderController::class,'index'])->name('formclientorder.index');
+        Route::get('/form-client-order', [App\Http\Controllers\ClientOrderController::class,'index'])->name('formclientorder.index')->middleware(['must-dcm']);
         Route::get('/form-client-order-getsett', [App\Http\Controllers\ClientOrderController::class,'getsett'])->name('formclientorder.getsett');
         Route::post('/form-client-order', [App\Http\Controllers\ClientOrderController::class,'store'])->name('formclientorder.store');
         /**
          * Windows
          */
         Route::group(['prefix' => 'window-approve'], function() {
-            Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('window-approve.index');
+            Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('window-approve.index')->middleware(['must-rm']);
             Route::patch('/update/{orderId}', [WindowApproveController::class, 'changeStatus']);
         });
          
