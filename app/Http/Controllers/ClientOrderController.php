@@ -32,7 +32,7 @@ class ClientOrderController extends Controller
         $trx_date = date('Y-m-d');
         $status = 'M';
         $item = ClientLimit::where('Client', $request['client'])->first();
-        $limit = ClientLimitHelper::calculateClientLimit($item);
+        $limit = ClientLimitHelper::calculateClientLimit($item, str_replace(',', "", $request['amount']) );
         $status = $limit['status'] == '' ? 'M' : 'P';
 
         $client_order->create(
@@ -73,7 +73,7 @@ class ClientOrderController extends Controller
     public function getsett(Request $request)
     {
         $query = $request->get('query');
-        $sett_date = date('Y-m-d', strtotime('+' . intval($query) . ' days'));
+        $sett_date = date('Y-m-d', strtotime('+' . intval($query) . ' weekday'));
         $sett_proses = 1;
         while ($this->get_holiday($sett_date)) {
             $sett_date = date('Y-m-d', strtotime($sett_date . '+' . $sett_proses . ' days'));

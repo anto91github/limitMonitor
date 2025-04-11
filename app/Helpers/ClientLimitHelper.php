@@ -7,7 +7,7 @@ use Carbon\Carbon;
 
 class ClientLimitHelper
 {
-    public static function calculateClientLimit($clientLimit)
+    public static function calculateClientLimit($clientLimit, $insert_limit = 0)
     {
         // Ambil semua order aktif (P atau M) dan belum melewati SettleDate
         $activeOrders = $clientLimit->orders->filter(function ($order) {
@@ -17,7 +17,7 @@ class ClientLimitHelper
 
         // Total amount yang masih aktif
         $usedLimit = $activeOrders->sum('Amount');
-        $availableLimit = $clientLimit->ClientLimit - $usedLimit;
+        $availableLimit = $clientLimit->ClientLimit - $usedLimit - $insert_limit;
 
         return [
             'nama_client' => $clientLimit->Client,
