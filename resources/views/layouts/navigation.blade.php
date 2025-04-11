@@ -110,13 +110,21 @@
                     Client Position
                 </a>
             </li> 
+            <li class="nav-item">
+                <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('trade.transactions') }}">
+                    <svg class="nav-icon">
+                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
+                    </svg>
+                    Trade History
+                </a>
+            </li> 
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('client.transactions') }}">
                     <svg class="nav-icon">
                         <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
                     </svg>
-                    Order Hisotry Transaction
+                    Order History
                 </a>
             </li> 
         </ul>

@@ -4,9 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\WindowOrder;
-use Illuminate\Support\Facades\DB;
 
-class ClientTransactionController extends Controller
+class TradeTransactionController extends Controller
 {
     public function index(Request $request)
     {
@@ -16,6 +15,8 @@ class ClientTransactionController extends Controller
         $toDate = $request->input('to_date');
 
         $query = WindowOrder::query();
+
+        $query->where('Status', 'M');
 
         // Validasi client name wajib diisi hanya jika form disubmit
         if ($request->has('search')) {
@@ -41,6 +42,6 @@ class ClientTransactionController extends Controller
 
         $transactions = $query->orderBy('TrxDate', 'desc')->paginate(10);
 
-        return view('client_transactions.index', compact('transactions'));
+        return view('trade_transaction.index', compact('transactions'));
     }
 }

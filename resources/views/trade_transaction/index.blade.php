@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h2>Order History Transaction</h2>
+    <h2>Trade History Transaction</h2>
     
     <div class="card mb-4">
         <div class="card-body">
-            <form action="{{ route('client.transactions') }}" method="GET" id="searchForm">
+            <form action="{{ route('trade.transactions') }}" method="GET" id="searchForm">
                 @csrf
                 
                 <div class="row">
