@@ -58,7 +58,7 @@ class UsersController extends Controller
             'status' => $status
         ]));
 
-        AuditTrailHelper::add_log('Input', [
+        AuditTrailHelper::add_log('Insert', [
             'password' => '',
             'uid' => $request->uid,
             'role_id' => $request->role,

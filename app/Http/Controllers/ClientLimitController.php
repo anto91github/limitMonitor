@@ -37,7 +37,8 @@ class ClientLimitController extends Controller
                     'ClientLimit' => $request['credit']
                 ]
             );
-            AuditTrailHelper::add_log('Input', [
+            
+            AuditTrailHelper::add_log('Insert', [
                 'Client' => $request['client'],
                 'ClientLimit' => $request['credit']
             ]);

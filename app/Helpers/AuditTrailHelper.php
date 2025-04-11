@@ -21,8 +21,6 @@ final class AuditTrailHelper
             }
         }
 
-
-
         switch ($type) {
             case 'Insert':
                 $log = 'Insert data ' . $datalog;

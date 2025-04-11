@@ -52,7 +52,7 @@ class ClientOrderController extends Controller
         );
 
 
-        AuditTrailHelper::add_log('Input', [
+        AuditTrailHelper::add_log('Insert', [
             'TrxDate' => $trx_date,
             'SettleDate' => $request['sett_date'],
             'BorS' => $request['bors'],
