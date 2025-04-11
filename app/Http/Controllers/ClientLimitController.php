@@ -11,6 +11,8 @@ class ClientLimitController extends Controller
 {
     public function index()
     {
+        AuditTrailHelper::add_log('View', '/form_client_limit');
+
         return view('/form/form_client_limit');
     }
 
@@ -39,6 +41,7 @@ class ClientLimitController extends Controller
                 'Client' => $request['client'],
                 'ClientLimit' => $request['credit']
             ]);
+
             return redirect()->route('formclientlimit.index')
                 ->withSuccess(__('Created successfully.'));
         } else {

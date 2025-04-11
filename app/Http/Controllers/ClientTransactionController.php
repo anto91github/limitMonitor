@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\WindowOrder;
+use Illuminate\Http\Request;
+use App\Helpers\AuditTrailHelper;
 use Illuminate\Support\Facades\DB;
 
 class ClientTransactionController extends Controller
@@ -39,6 +40,8 @@ class ClientTransactionController extends Controller
         }
         
         $transactions = $query->orderBy('TrxDate', 'desc')->paginate(10);
+
+        AuditTrailHelper::add_log('View', '/client-position');
         
         return view('client_transactions.index', compact('transactions'));
     }
