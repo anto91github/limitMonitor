@@ -18,12 +18,19 @@ Show User
                     Email: {{ $user->email }}
                 </div>
                 <div>
-                    Username: {{ $user->username }}
+                    Role: 
+                    @if($user->role_id == 1)
+                        RM
+                    @elseif ($user->role_id == 2)
+                        DCM
+                    @else
+                        IT
+                    @endif
                 </div>
 
                 <div class="mt-4">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-info">Edit</a>
-                    <a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
+                    <a href="{{ route('dashboard') }}" class="btn btn-default">Back</a>
                 </div>
             </div>
 

@@ -17,7 +17,7 @@
                 </svg>
                 Admin Setting
             </a>
-            <ul class="nav-group-items" style="height: 0px;">
+            <ul class="nav-group-items" style="height: {{ request()->is('users*') || request()->is('roles*') ? 'auto' : '0px' }}; overflow: hidden;">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
                         <svg class="nav-icon">
@@ -57,10 +57,10 @@
                 </svg>
                 Form
             </a>
-            <ul class="nav-group-items" style="height: 0px;">
+            <ul class="nav-group-items" style="height: {{ request()->is('form-client-limit*') || request()->is('form-client-order*') ? 'auto' : '0px' }}; overflow: hidden;">
                 @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 1)
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="/form-client-limit">
+                        <a class="nav-link {{ request()->is('form-client-limit*') ? 'active' : '' }}" href="/form-client-limit">
                             <svg class="nav-icon">
                                 <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
                             </svg>
@@ -71,7 +71,7 @@
                 
                 @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 2)
                     <li class="nav-item">
-                        <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="/form-client-order">
+                        <a class="nav-link {{ request()->is('form-client-order*') ? 'active' : '' }}" href="/form-client-order">
                             <svg class="nav-icon">
                                 <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
                             </svg>
@@ -90,7 +90,9 @@
             </svg>
             Data Window
         </a>
-        <ul class="nav-group-items" style="height: 0px;">
+        <ul class="nav-group-items" style="height: {{ request()->is('window*') || request()->is('window-approve*') || 
+                                                    request()->is('client-position*') || request()->is('trade-transactions*') ||
+                                                    request()->is('client-transactions*') ? 'auto' : '0px' }}; overflow: hidden;">
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href={{ route('window.index') }}>
                     <svg class="nav-icon">
@@ -140,3 +142,9 @@
     </li>
 
 </ul>
+
+<style>
+    .nav-group-items {
+        transition: height 0.3s ease; /* Transisi untuk efek halus */
+    }
+</style>
