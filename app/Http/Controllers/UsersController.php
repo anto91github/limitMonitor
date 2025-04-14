@@ -26,6 +26,7 @@ class UsersController extends Controller
     {
         $users = User::with('role')->orderBy('id','ASC')->paginate(10);
 
+        AuditTrailHelper::add_log('View', '/User');
         return view('users.index', compact('users'));
     }
 
