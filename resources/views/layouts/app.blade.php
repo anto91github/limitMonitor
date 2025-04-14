@@ -8,9 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>
         @if (trim($__env->yieldContent('title')))
-            @yield('title') | {{ config('app.name', 'BCA Sekuritas') }}
+            @yield('title') | BCA Sekuritas
         @else
-            {{ config('app.name', 'BCA Sekuritas') }}
+            BCA Sekuritas
         @endif
     </title>
     <link rel="icon" href="{{ asset('icons/icon.png') }}">
@@ -29,7 +29,6 @@
         <div class="sidebar-brand d-none d-md-flex bg-secondary">
             <img class="sidebar-brand-full" width="180" alt="CoreUI Logo"
                 src="{{ asset('icons/Logo_BCA_Sekuritas.png') }}">
-
             </img>
             <img class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo"
                 src="{{ asset('icons/icon.png') }}">
