@@ -12,26 +12,20 @@
     @if (Auth::user()->role_id == 3)
         <li class="nav-group" aria-expanded="false">
             <a class="nav-link nav-group-toggle" href="#">
-                <svg class="nav-icon">
-                    <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
-                </svg>
+                <img src="{{ asset('icons/admin.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                 Admin Setting
             </a>
             <ul class="nav-group-items" style="height: {{ request()->is('users*') || request()->is('roles*') ? 'auto' : '0px' }}; overflow: hidden;">
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href="{{ route('users.index') }}">
-                        <svg class="nav-icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                        </svg>
+                        <img src="{{ asset('icons/user.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                         {{ __('Users') }}
                     </a>
                 </li>
 
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('roles.index') }}">
-                        <svg class="nav-icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-                        </svg>
+                        <img src="{{ asset('icons/role.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                         {{ __('Roles') }}
                     </a>
                 </li>
@@ -52,18 +46,14 @@
     
         <li class="nav-group" aria-expanded="false">
             <a class="nav-link nav-group-toggle" href="#">
-                <svg class="nav-icon">
-                    <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
-                </svg>
+                <img src="{{ asset('icons/form.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                 Form
             </a>
             <ul class="nav-group-items" style="height: {{ request()->is('form-client-limit*') || request()->is('form-client-order*') ? 'auto' : '0px' }}; overflow: hidden;">
                 @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 1)
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('form-client-limit*') ? 'active' : '' }}" href="/form-client-limit">
-                            <svg class="nav-icon">
-                                <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                            </svg>
+                            <img src="{{ asset('icons/formclient.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                             Form Client Limit
                         </a>
                     </li>
@@ -72,9 +62,7 @@
                 @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 2)
                     <li class="nav-item">
                         <a class="nav-link {{ request()->is('form-client-order*') ? 'active' : '' }}" href="/form-client-order">
-                            <svg class="nav-icon">
-                                <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-                            </svg>
+                            <img src="{{ asset('icons/formorder.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                             Form Order
                         </a>
                     </li>
@@ -85,9 +73,7 @@
 
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
-            <svg class="nav-icon">
-                <use xlink:href="{{ asset('icons/coreui.svg#cil-star') }}"></use>
-            </svg>
+            <img src="{{ asset('icons/order.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
             Data Window
         </a>
         <ul class="nav-group-items" style="height: {{ request()->is('window*') || request()->is('window-approve*') || 
@@ -95,9 +81,7 @@
                                                     request()->is('client-transactions*') ? 'auto' : '0px' }}; overflow: hidden;">
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('users*') ? 'active' : '' }}" href={{ route('window.index') }}>
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-user') }}"></use>
-                    </svg>
+                    <img src="{{ asset('icons/windoworder.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                     Window Order
                 </a>
             </li>
@@ -105,9 +89,7 @@
             @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 1)
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('window-approve.index') }}">
-                        <svg class="nav-icon">
-                            <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-                        </svg>
+                        <img src="{{ asset('icons/windowapproval.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                         Window Approval
                     </a>
                 </li> 
@@ -115,26 +97,20 @@
             
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('client-position.index') }}">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-                    </svg>
+                    <img src="{{ asset('icons/clienposition.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                     Client Position
                 </a>
             </li> 
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('trade.transactions') }}">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-                    </svg>
+                    <img src="{{ asset('icons/tradehistory.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                     Trade History
                 </a>
             </li> 
 
             <li class="nav-item">
                 <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('client.transactions') }}">
-                    <svg class="nav-icon">
-                        <use xlink:href="{{ asset('icons/coreui.svg#cil-group') }}"></use>
-                    </svg>
+                    <img src="{{ asset('icons/orderhistory.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
                     Order History
                 </a>
             </li> 
@@ -147,4 +123,10 @@
     .nav-group-items {
         transition: height 0.3s ease; /* Transisi untuk efek halus */
     }
+    .nav-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 4px;
+    object-fit: contain;
+}
 </style>

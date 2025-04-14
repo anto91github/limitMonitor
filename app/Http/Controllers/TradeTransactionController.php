@@ -42,7 +42,7 @@ class TradeTransactionController extends Controller
         }
 
         $transactions = $query->orderBy('TrxDate', 'desc')->paginate(10);
-        AuditTrailHelper::add_log('View', '/trade-transactions');
+        AuditTrailHelper::add_log('View', '/trade-transactions/'. $clientName);
         return view('trade_transaction.index', compact('transactions'));
     }
 }

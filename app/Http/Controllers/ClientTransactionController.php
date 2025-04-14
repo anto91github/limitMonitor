@@ -42,7 +42,7 @@ class ClientTransactionController extends Controller
 
         $transactions = $query->orderBy('TrxDate', 'desc')->paginate(10);
 
-        AuditTrailHelper::add_log('View', '/client-position');
+        AuditTrailHelper::add_log('View', '/client-position/'. $clientName);
         
         return view('client_transactions.index', compact('transactions'));
     }
