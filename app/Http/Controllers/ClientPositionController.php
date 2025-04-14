@@ -27,4 +27,28 @@ class ClientPositionController extends Controller
 
         return view('clientPosition.index', ['clientLimits' => $clientLimits]);
     }
+
+    public function delete($client)
+    {
+        try {
+      
+            ClientLimit::where('Client', $client)->update(
+                [
+                    'ClientLimit' => 0
+                ]
+            );
+
+        
+            AuditTrailHelper::add_log('Edit',  [
+                'lient' => $client,
+                'ClientLimit' => str_replace(',', "", 'Reset limit to 0')
+            ]);
+
+            return redirect()->route('client-position.index')
+                ->withSuccess(__('Client limit has been reset to 0'));
+        } catch (\Exception $e) {
+            return redirect()->route('client-position.index')
+                ->withErrors(__('Failed to reset limit: ') . $e->getMessage());
+        }
+    }
 }

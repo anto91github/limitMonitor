@@ -85,6 +85,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
         Route::get('/client-position', [App\Http\Controllers\ClientPositionController::class, 'index'])->name('client-position.index');
         Route::get('/client-transactions', [App\Http\Controllers\ClientTransactionController::class, 'index'])->name('client.transactions');
         Route::get('/trade-transactions', [App\Http\Controllers\TradeTransactionController::class, 'index'])->name('trade.transactions');
+        Route::put('/client-position/{client}/delete', [App\Http\Controllers\ClientPositionController::class, 'delete'])->name('clientposition.delete');
         
     });
 });
