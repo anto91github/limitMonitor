@@ -15,16 +15,16 @@ Role list
                 @include('layouts.includes.messages')
             </div>
 
-            <div class="mb-2 text-end">
+            {{-- <div class="mb-2 text-end">
                 <a href="{{ route('roles.create') }}" class="btn btn-primary btn-sm float-right">Add role</a>
-            </div>
+            </div> --}}
 
             <table class="table table-striped">
                 <tr>
                     <th width="1%">No</th>
                     <th >Name</th>
                     {{-- <th>Permissions</th> --}}
-                    <th width="15%">Action</th>
+                    {{-- <th width="15%">Action</th> --}}
                 </tr>
                 @foreach ($roles as $key => $role)
                 <tr>
@@ -35,15 +35,15 @@ Role list
                         <span class="badge text-bg-info">{{ $perm->name }}</span>
                         @endforeach
                     </td> --}}
-                    <td>
+                    <!--<td>
                         {{-- <a class="btn btn-info btn-sm" href="{{ route('roles.show', $role->id) }}">Show</a> --}}
-                        <a class="btn btn-primary btn-sm" href="{{ route('roles.edit', $role->id) }}">Edit</a>
-                        <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
+                        {{-- <a class="btn btn-primary btn-sm" href="{{ route('roles.edit', $role->id) }}">Edit</a> --}}
+                        {{-- <form action="{{ route('roles.destroy', $role->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-                        </form>
-                    </td>
+                        </form> --}}
+                    </td> -->
                    
                 </tr>
                 @endforeach
