@@ -32,8 +32,16 @@ class ClientOrderController extends Controller
         $trx_date = date('Y-m-d');
         $status = 'M';
         $item = ClientLimit::where('Client', $request['client'])->first();
-        $limit = ClientLimitHelper::calculateClientLimit($item, str_replace(',', "", $request['amount']) );
+        $limit = ClientLimitHelper::calculateClientLimit($item, str_replace(',', "", $request['amount']));
         $status = $limit['status'] == '' ? 'M' : 'P';
+
+        if ($limit['credit_limit'] == 0) {
+            AuditTrailHelper::add_log('Other', 'Create Order Client ' . $request['client'] . ' Credit Limit 0. Status Client Inactive');
+            
+            return redirect()->route('formclientorder.index')
+                ->withWarning(__('Credit Limit 0. Status Client Inactive'));
+            exit;
+        }
 
         $client_order->create(
             [
@@ -66,15 +74,13 @@ class ClientOrderController extends Controller
             'CreatedAt' => Carbon::now()
         ]);
 
-        if($status == 'M'){
+        if ($status == 'M') {
             return redirect()->route('formclientorder.index')
                 ->withSuccess(__('Created successfully.'));
         } else {
             return redirect()->route('formclientorder.index')
-                 ->withWarning(__('Order untuk Client ini sudah melenihi Limit, Order ini akan berstatus PENDING dan perlu di Approve oleh RM'));
+                ->withWarning(__('Order untuk Client ini sudah melebihi Limit, Order ini akan berstatus PENDING dan perlu di Approve oleh RM'));
         }
-
-        
     }
 
     public function getsett(Request $request)
