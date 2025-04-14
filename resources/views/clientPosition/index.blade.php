@@ -58,8 +58,8 @@ Client Position
                     @endforeach
                 </tbody>
             </table>
-            <div class="d-flex justify-content-center">
-                {{ $clientLimits->links() }}
+            <div class="my-3 float-end">
+                {{ $clientLimits->withQueryString()->links() }}
             </div>
         </div>
     </div>
