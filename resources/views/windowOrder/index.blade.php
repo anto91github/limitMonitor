@@ -36,7 +36,7 @@
                 </form>
 
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                    <table class="table table-striped  table-sm">
                         <thead>
                             <tr>
                                 <th scope="col" width="3%">No</th>
@@ -49,8 +49,8 @@
                                 <th scope="col">Harga</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Approved / Rejected By</th>
-                                <th scope="col">Approved / Rejected Date</th>
+                                <th scope="col">Action By</th>
+                                <th scope="col">Action Date</th>
                                 <th scope="col">Note</th>
                             </tr>
                         </thead>
