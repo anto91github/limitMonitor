@@ -56,6 +56,18 @@ class ClientLimitController extends Controller
         }
     }
 
+    public function edit($client)
+    {
+        $clientData = ClientLimit::where('Client', $client)->first();
+
+        AuditTrailHelper::add_log('View', '/form_client_limit/edit'.$clientData);
+
+        return view('/form/form_client_limit', [
+            'clientData' => $clientData,
+            'isEdit' => true
+        ]);
+    }
+
     public function autocomplete(Request $request)
     {
         $search = $request->get('query');
