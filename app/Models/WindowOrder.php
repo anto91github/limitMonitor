@@ -14,7 +14,7 @@ class WindowOrder extends Model
 
     protected $fillable = [
         'Id','TrxDate', 'SettleDate', 'BorS', 'Client', 'Obligasi', 'Nominal', 'Harga',
-        'Amount', 'Uid', 'Status', 'ApprovedBy', 'ApprovedDate', 'Note', 'OverLimit', 'CreatedAt'
+        'Amount', 'Uid', 'Status', 'ApprovedBy', 'ApprovedDate', 'RejectedDate', 'RejectedBy', 'Note', 'OverLimit', 'CreatedAt'
     ];
     
     // Nonaktifkan timestamps jika tidak ada kolom created_at/updated_at

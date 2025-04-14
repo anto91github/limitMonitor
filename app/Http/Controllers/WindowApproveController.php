@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WindowOrder;
 use Illuminate\Http\Request;
 use App\Helpers\AuditTrailHelper;
+use Illuminate\Support\Facades\Auth;
 
 class WindowApproveController extends Controller
 {
@@ -33,10 +34,22 @@ class WindowApproveController extends Controller
     public function changeStatus($orderId, Request $request)
     {
         try {
-            WindowOrder::findOrFail($orderId)->update([
+            $order = WindowOrder::findOrFail($orderId);
+
+            $updateData = [
                 'Status' => $request['newStatus'],
-                'Note' => $request['approveNote']
-            ]);
+                'Note' => $request['approveNote'],
+            ];
+
+            if ($request['newStatus'] == 'M') {
+                $updateData['ApprovedBy'] =  Auth::user()->uid;
+                $updateData['ApprovedDate'] = now(); 
+            } else if ($request['newStatus'] == 'R'){
+                $updateData['RejectedBy'] =  Auth::user()->uid;
+                $updateData['RejectedDate'] = now(); 
+            }
+
+            $order->update($updateData);            
 
             AuditTrailHelper::add_log('Edit', [
                 'OrderId' => $orderId,

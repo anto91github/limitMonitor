@@ -49,8 +49,8 @@
                                 <th scope="col">Harga</th>
                                 <th scope="col">Amount</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Approved By</th>
-                                <th scope="col">Approved Date</th>
+                                <th scope="col">Approved / Rejected By</th>
+                                <th scope="col">Approved / Rejected Date</th>
                                 <th scope="col">Note</th>
                             </tr>
                         </thead>
@@ -77,8 +77,20 @@
                                             <span class="badge bg-secondary text-white">{{ $d->Status }}</span>
                                         @endif
                                     </td>
-                                    <td>{{ $d->ApprovedBy }}</td>
-                                    <td>{{ $d->ApprovedDate }}</td>
+                                    <td>
+                                        @if ($d->Status == 'M')
+                                            {{ $d->ApprovedBy }}
+                                        @elseif ($d->Status == 'R')
+                                            {{ $d->RejectedBy }}
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($d->Status == 'M')
+                                            {{ $d->ApprovedDate }}
+                                        @elseif ($d->Status == 'R')
+                                            {{ $d->RejectedDate }}
+                                        @endif
+                                    </td>
                                     <td>{{ $d->Note }}</td>
                                 </tr>
                             @endforeach
