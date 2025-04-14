@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClientLimit;
+use App\Models\WindowOrder;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $count_client = ClientLimit::count();
+        $count_pending = WindowOrder::where('status', 'P')->count();
+
+        return view('home', ['count_client' => $count_client, 'count_pending' => $count_pending]);
     }
 
     public function about()
