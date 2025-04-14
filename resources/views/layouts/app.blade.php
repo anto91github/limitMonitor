@@ -26,13 +26,12 @@
 
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-        <div class="sidebar-brand d-none d-md-flex bg-secondary">
+        <div class="sidebar-brand d-none d-md-flex bg-light">
             <img class="sidebar-brand-full" width="180" alt="CoreUI Logo"
                 src="{{ asset('icons/Logo_BCA_Sekuritas.png') }}">
             </img>
             <img class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo"
                 src="{{ asset('icons/icon.png') }}">
-
             </img>
         </div>
         @include('layouts.navigation')
