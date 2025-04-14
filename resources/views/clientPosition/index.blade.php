@@ -54,6 +54,9 @@ Client Position
                             <td class="{{ $limit['status'] == 'LIMIT REACHED' ? 'text-danger' : '' }}">
                                 {{ $limit['status'] }}
                             </td>
+                            <td>
+                                <a href="{{ route('formclientlimit.edit', $limit['nama_client']) }}" class="btn btn-sm btn-warning">Edit</a>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
