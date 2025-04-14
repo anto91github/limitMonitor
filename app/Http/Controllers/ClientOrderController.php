@@ -66,8 +66,15 @@ class ClientOrderController extends Controller
             'CreatedAt' => Carbon::now()
         ]);
 
-        return redirect()->route('formclientorder.index')
-            ->withSuccess(__('Created successfully.'));
+        if($status == 'M'){
+            return redirect()->route('formclientorder.index')
+                ->withSuccess(__('Created successfully.'));
+        } else {
+            return redirect()->route('formclientorder.index')
+                 ->withWarning(__('Order untuk Client ini sudah melenihi Limit, Order ini akan berstatus PENDING dan perlu di Approve oleh RM'));
+        }
+
+        
     }
 
     public function getsett(Request $request)
