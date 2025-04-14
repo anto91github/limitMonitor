@@ -8,30 +8,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>
         @if (trim($__env->yieldContent('title')))
-        @yield('title') | {{ config('app.name', 'Laravel') }}
+            @yield('title') | {{ config('app.name', 'BCA Sekuritas') }}
         @else
-        {{ config('app.name', 'Laravel') }}
+            {{ config('app.name', 'BCA Sekuritas') }}
         @endif
     </title>
+    <link rel="icon" href="{{ asset('icons/icon.png') }}">
     <meta name="theme-color" content="#ffffff">
     @stack('before-styles')
     @vite('resources/sass/app.scss')
     @stack('after-styles')
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/jquery-ui/jquery-ui.min.js') }}"></script>
-    <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.css')}}">
+    <link rel="stylesheet" href="{{ asset('js/jquery-ui/jquery-ui.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
     <div class="sidebar sidebar-dark sidebar-fixed" id="sidebar">
-        <div class="sidebar-brand d-none d-md-flex">
-            <svg class="sidebar-brand-full" width="118" height="46" alt="CoreUI Logo">
-                <use xlink:href="{{ asset('icons/brand.svg#full') }}"></use>
-            </svg>
-            <svg class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo">
-                <use xlink:href="{{ asset('icons/brand.svg#signet') }}"></use>
-            </svg>
+        <div class="sidebar-brand d-none d-md-flex bg-secondary">
+            <img class="sidebar-brand-full" width="180" alt="CoreUI Logo"
+                src="{{ asset('icons/Logo_BCA_Sekuritas.png') }}">
+
+            </img>
+            <img class="sidebar-brand-narrow" width="46" height="46" alt="CoreUI Logo"
+                src="{{ asset('icons/icon.png') }}">
+
+            </img>
         </div>
         @include('layouts.navigation')
         <button class="sidebar-toggler" type="button" data-coreui-toggle="unfoldable"></button>
