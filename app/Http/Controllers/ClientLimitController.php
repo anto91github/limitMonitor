@@ -26,7 +26,7 @@ class ClientLimitController extends Controller
 
         $data_exists = $client_limit->where('Client', $request['client'])->update(
             [
-                'ClientLimit' => $request['credit']
+                'ClientLimit' => str_replace(',', "", $request['credit'])
             ]
         );
 
@@ -34,13 +34,13 @@ class ClientLimitController extends Controller
             $client_limit->create(
                 [
                     'Client' => $request['client'],
-                    'ClientLimit' => $request['credit']
+                    'ClientLimit' => str_replace(',', "", $request['credit'])
                 ]
             );
-            
+
             AuditTrailHelper::add_log('Insert', [
                 'Client' => $request['client'],
-                'ClientLimit' => $request['credit']
+                'ClientLimit' => str_replace(',', "", $request['credit'])
             ]);
 
             return redirect()->route('formclientlimit.index')

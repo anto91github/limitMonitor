@@ -21,7 +21,7 @@
                     <input class="form-control" type="text" name="client" id="client" required>
                     <br>
                     <label class="form-label" for="credit">Credit Limit</label>
-                    <input class="form-control" type="number" name="credit" id="credit" required>
+                    <input class="form-control" type="text" name="credit" id="credit"  oninput="thousandSeparator(this)" required>
                     <br>
                     <button class="btn btn-primary d-flex" type="submit">Apply</button>
                 </form>
@@ -30,6 +30,13 @@
         </div>
     </div>
     <script>
+
+        function thousandSeparator(input) {
+            value = input.value.replace(/[^\d\.]/g, '');
+            value = parseInt(value).toLocaleString('en');
+            input.value = value;
+        }
+
         $(document).ready(function() {
             $('#client').autocomplete({
                 source: function(request, response) {
@@ -52,7 +59,7 @@
                 },
                 select: function(event, ui) {
                     $('#client').val(ui.item.value);
-                    $('#credit').val(ui.item.credit)
+                    $('#credit').val(parseInt(ui.item.credit).toLocaleString('en'))
                 }
             })
         })
