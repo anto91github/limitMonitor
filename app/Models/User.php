@@ -57,6 +57,11 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    public function findForPassport($username)
+    {
+        return $this->where('uid', $username)->first();
+    }
+
     public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');

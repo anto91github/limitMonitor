@@ -43,18 +43,26 @@ class LoginController extends Controller
     }
 
     public function username()
-    {   
-        return 'email';
+    {
+        return 'username';
     }
 
     protected function attemptLogin(Request $request)
     {
+        $credentials = [
+            'password' => $request->password,
+            'status' => 1 // Hanya izinkan login jika status = 1
+        ];
+    
+         // Cek apakah input berupa email atau uid
+        if (filter_var($request->input('username'), FILTER_VALIDATE_EMAIL)) {
+            $credentials['email'] = $request->input('username');
+        } else {
+            $credentials['uid'] = $request->input('username');
+        }
+
         $loginSuccessful = $this->guard()->attempt(
-            [
-                'email' => $request->email,
-                'password' => $request->password,
-                'status' => 1 // Hanya izinkan login jika status = 1
-            ],
+            $credentials,
             $request->filled('remember')
         );
     
