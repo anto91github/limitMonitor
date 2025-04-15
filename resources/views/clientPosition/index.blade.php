@@ -42,6 +42,7 @@ Client Position
                             <th>Credit Limit</th>
                             <th>Used Limit</th>
                             <th>Available Limit</th>
+                            <th>Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -54,6 +55,7 @@ Client Position
                             <td class="{{ $limit['status'] == 'LIMIT REACHED' || $limit['status'] == 'INACTIVE' ? 'text-danger' : '' }}">
                                 {{ $limit['status'] }}
                             </td>
+                            @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 1)
                             <td>
                                 <a href="{{ route('formclientlimit.edit', $limit['nama_client']) }}" class="btn btn-sm btn-warning">Edit</a>
                                 <form action="{{ route('clientposition.delete', $limit['nama_client']) }}" method="POST" style="display:inline;">
@@ -62,6 +64,7 @@ Client Position
                                     <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin reset limit ke 0?')">Delete</button>
                                 </form>
                             </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
