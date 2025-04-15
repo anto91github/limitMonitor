@@ -43,9 +43,10 @@
                                 <th>Credit Limit</th>
                                 <th>Used Limit</th>
                                 <th>Available Limit</th>
+                                <th>Status</th>
                                 <th>Input Latest By</th>
                                 <th>Input Latest Date</th>
-                                <th>Status</th>
+                                
                             </tr>
                         </thead>
                         <tbody>
