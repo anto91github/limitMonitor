@@ -6,6 +6,7 @@ use App\Helpers\AuditTrailHelper;
 use App\Http\Requests\ClientLimitRequest;
 use App\Models\ClientLimit;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 use Illuminate\Support\Facades\Auth;
 
@@ -29,7 +30,8 @@ class ClientLimitController extends Controller
         $data_exists = $client_limit->where('Client', $request['client'])->update(
             [
                 'ClientLimit' => str_replace(',', "", $request['credit']),
-                'Updated_by'=> Auth::user()->uid
+                'Updated_by'=> Auth::user()->uid,
+                'Updated_at' => Carbon::now()
             ]
         );
 
@@ -38,14 +40,16 @@ class ClientLimitController extends Controller
                 [
                     'Client' => $request['client'],
                     'ClientLimit' => str_replace(',', "", $request['credit']),
-                    'Updated_by'=> Auth::user()->uid
+                    'Updated_by'=> Auth::user()->uid,
+                    'Updated_at' => Carbon::now()
                 ]
             );
 
             AuditTrailHelper::add_log('Insert', [
                 'Client' => $request['client'],
                 'ClientLimit' => str_replace(',', "", $request['credit']),
-                'Updated_by'=> Auth::user()->uid
+                'Updated_by'=> Auth::user()->uid,
+                'Updated_at' => Carbon::now()
             ]);
 
             return redirect()->route('formclientlimit.index')
@@ -54,7 +58,8 @@ class ClientLimitController extends Controller
             AuditTrailHelper::add_log('Edit', [
                 'Client' => $request['client'],
                 'ClientLimit' => $request['credit'],
-                'Updated_by'=> Auth::user()->uid
+                'Updated_by'=> Auth::user()->uid,
+                'Updated_at' => Carbon::now()
             ]);
 
             return redirect()->route('formclientlimit.index')
