@@ -16,7 +16,9 @@ class ClientLimitHelper
                 'credit_limit' => 0,
                 'used_limit' => 0,
                 'available_limit' => 0,
-                'status' => 'INACTIVE'
+                'status' => 'INACTIVE',
+                'update_by' => $clientLimit->Update_by,
+                'update_at' => $clientLimit->Update_at
             ];
         }
 
@@ -40,7 +42,9 @@ class ClientLimitHelper
             'credit_limit' => $clientLimit->ClientLimit,
             'used_limit' => $usedLimit,
             'available_limit' => $availableLimit,
-            'status' => $status
+            'status' => $status,
+            'update_by' => $clientLimit->Update_by,
+            'update_at' => $clientLimit->Update_at
         ];
     }
 }
