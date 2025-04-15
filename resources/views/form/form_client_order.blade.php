@@ -42,13 +42,10 @@
                     <input class="form-control" type="text" name="amount" id="amount" required readonly>
                     <br>
                     <label class="form-label" for="sett">Settle Date</label>
-                    <div class="row">
-                        <div class="col-4">
-                            <select class="form-control" name="sett" id="sett" required>
-                                <option value="">Pilih salah satu</option>
-                                <option value="1">T+1</option>
-                                <option value="2">T+2</option>
-                            </select>
+                    <div class="input-group row">
+                        <div class="col-4 d-flex">
+                            <span class="input-group-text">T+ </span>
+                            <input class="form-control" type="text"  name="sett" id="sett" required>
                         </div>
                         <div class="col-8">
                             <input class="form-control" type="text" name="sett_date" id="sett_date" required readonly>
@@ -91,7 +88,7 @@
 
 
         $(document).ready(function() {
-            $('#sett').on('change', function() {
+            $('#sett').on('input', function() {
                 var selected = $(this).val();
 
                 $.ajax({
