@@ -140,11 +140,11 @@ class UsersController extends Controller
         $user->update($dataToUpdate);
 
         // $user->syncRoles($request->get('role'));
-
+        
         if($logedin_role_id == '3'){
-            // return redirect()->route('users.index')
-            //     ->withSuccess(__('User updated successfully.'));
-            return redirect()->back()->withSuccess(__('User  updated successfully.'));
+            return redirect()->route('users.index')
+                ->withSuccess(__('User updated successfully.'));
+            // return redirect()->back()->withSuccess(__('User  updated successfully.'));
         } else {
             return redirect()->route('dashboard')
                  ->withSuccess(__('User  updated successfully.'));
