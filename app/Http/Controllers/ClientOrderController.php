@@ -37,9 +37,9 @@ class ClientOrderController extends Controller
 
         if ($limit['credit_limit'] == 0) {
             AuditTrailHelper::add_log('Other', 'Create Order Client ' . $request['client'] . ' Credit Limit 0. Status Client Inactive');
-            
+
             return redirect()->route('formclientorder.index')
-                ->withWarning(__('Credit Limit 0. Status Client Inactive'));
+                ->withErrors(__('Credit Limit 0. Status Client Inactive'));
             exit;
         }
 
