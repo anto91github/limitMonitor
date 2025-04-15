@@ -1,3 +1,6 @@
+<div class="mt-2">
+    @include('layouts.includes.messages')
+</div>
 <div class="row">
     <div class="col-sm-6 col-lg-3">
         <div class="card mb-4">
