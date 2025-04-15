@@ -31,6 +31,16 @@ class ClientPositionController extends Controller
     public function delete($client)
     {
         try {
+
+            $clientLimit = ClientLimit::with(['orders' => function($query) {
+                $query->whereIn('Status', ['P', 'M'])
+                      ->where('SettleDate', '>=', now()->format('Y-m-d'));
+            }])->where('Client', $client)->first();
+    
+            if ($clientLimit->orders->count() > 0) {
+                return redirect()->route('client-position.index')
+                    ->withErrors(__('Gagal reset limit: Client punya order yang masih aktif'));
+            }
       
             ClientLimit::where('Client', $client)->update(
                 [

@@ -114,7 +114,12 @@
                 </div>
                 
                 <div class="mt-3">
-                    {{ $transactions->appends(request()->input())->links() }}
+                    {{ $transactions->appends([
+                        'client_name' => request('client_name'),
+                        'from_date' => request('from_date'),
+                        'to_date' => request('to_date'),
+                        'search' => request('search')
+                    ])->links() }}
                 </div>
             </div>
         </div>

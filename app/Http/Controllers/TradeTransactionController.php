@@ -19,8 +19,8 @@ class TradeTransactionController extends Controller
 
         $query->where('Status', 'M');
 
-        // Validasi client name wajib diisi hanya jika form disubmit
-        if ($request->has('search')) {
+
+        if ($request->has('search') || $request->has('page')) {
             if (empty($clientName)) {
                 return redirect()->back()->withErrors(['client_name' => 'Nama client wajib diisi']);
             }
@@ -29,16 +29,13 @@ class TradeTransactionController extends Controller
                 $query->where('Client', 'like', '%' . $clientName . '%');
             }
 
-            // Filter tanggal
             if (!empty($fromDate) && !empty($toDate)) {
                 $query->whereBetween('TrxDate', [$fromDate, $toDate]);
             } elseif (empty($fromDate) && empty($toDate) && !empty($clientName)) {
-                // Jika tanggal tidak diisi, tampilkan data sebelum hari ini
                 $query->where('TrxDate', '<', now()->format('Y-m-d'));
             }
         } else {
-            // Jika belum submit form, kembalikan query kosong
-            $query->where('id', '<', 0); // Cara cepat untuk return empty result
+            $query->where('id', '<', 0); 
         }
 
         $transactions = $query->orderBy('TrxDate', 'desc')->paginate(10);
