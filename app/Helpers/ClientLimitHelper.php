@@ -9,6 +9,17 @@ class ClientLimitHelper
 {
     public static function calculateClientLimit($clientLimit, $insert_limit = 0)
     {
+
+        if ($clientLimit->ClientLimit == 0) {
+            return [
+                'nama_client' => $clientLimit->Client,
+                'credit_limit' => 0,
+                'used_limit' => 0,
+                'available_limit' => 0,
+                'status' => 'INACTIVE'
+            ];
+        }
+
         // Ambil semua order aktif (P atau M) dan belum melewati SettleDate
         $activeOrders = $clientLimit->orders->filter(function ($order) {
             return in_array($order->Status, ['P', 'M']) &&
@@ -19,12 +30,17 @@ class ClientLimitHelper
         $usedLimit = $activeOrders->sum('Amount');
         $availableLimit = $clientLimit->ClientLimit - $usedLimit - $insert_limit;
 
+         $status = '';
+        if ($availableLimit <= 0) {
+            $status = 'LIMIT REACHED';
+        }
+
         return [
             'nama_client' => $clientLimit->Client,
             'credit_limit' => $clientLimit->ClientLimit,
             'used_limit' => $usedLimit,
             'available_limit' => $availableLimit,
-            'status' => $availableLimit > 0 ? '' : 'LIMIT REACHED'
+            'status' => $status
         ];
     }
 }

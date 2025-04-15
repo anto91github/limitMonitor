@@ -51,7 +51,7 @@ Client Position
                             <td>{{ number_format($limit['credit_limit'], 2) }}</td>
                             <td>{{ number_format($limit['used_limit'], 2) }}</td>
                             <td>{{ number_format($limit['available_limit'], 2) }}</td>
-                            <td class="{{ $limit['status'] == 'LIMIT REACHED' ? 'text-danger' : '' }}">
+                            <td class="{{ $limit['status'] == 'LIMIT REACHED' || $limit['status'] == 'INACTIVE' ? 'text-danger' : '' }}">
                                 {{ $limit['status'] }}
                             </td>
                             <td>
