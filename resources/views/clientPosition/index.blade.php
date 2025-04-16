@@ -44,8 +44,8 @@
                                 <th>Used Limit</th>
                                 <th>Available Limit</th>
                                 <th>Status</th>
-                                <th>Input Latest By</th>
-                                <th>Input Latest Date</th>
+                                <th>Latest Update By</th>
+                                <th>Latest Update Date</th>
                                 
                             </tr>
                         </thead>
