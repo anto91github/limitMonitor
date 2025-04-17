@@ -14,7 +14,7 @@
                         <div class="form-group position-relative">
                             <label for="client_name">Nama Client</label>
                             <input type="text" name="client_name" id="client_name" class="form-control" 
-                                   value="{{ request('client_name') }}" required>
+                                   value="{{ request('client_name') }}" >
                             @if(request('client_name'))
                                 <span class="clear-input" onclick="clearInput('client_name')">
                                     <i class="fas fa-times"></i>

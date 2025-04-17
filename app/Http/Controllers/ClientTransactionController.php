@@ -19,9 +19,6 @@ class ClientTransactionController extends Controller
         $query = WindowOrder::query();
 
         if ($request->has('search') || $request->has('page')) {
-            if (empty($clientName)) {
-                return redirect()->back()->withErrors(['client_name' => 'Nama client wajib diisi']);
-            }
 
             if (!empty($clientName)) {
                 $query->where('Client', 'like', '%' . $clientName . '%');
