@@ -73,7 +73,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function()
          * Windows
          */
         Route::group(['prefix' => 'window-approve'], function() {
-            Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('window-approve.index')->middleware(['must-rm']);
+            Route::get('/', [App\Http\Controllers\WindowApproveController::class, 'index'])->name('window-approve.index')->middleware(['must-rm-or-rmwolmt']);
             Route::patch('/update/{orderId}', [WindowApproveController::class, 'changeStatus']);
         });
          

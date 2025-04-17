@@ -70,5 +70,6 @@ class Kernel extends HttpKernel
         'must-rm' => \App\Http\Middleware\OnlyRM::class,
         'must-dcm' => \App\Http\Middleware\OnlyDCM::class,
         'must-it' => \App\Http\Middleware\OnlyIT::class,
+        'must-rm-or-rmwolmt' =>  \App\Http\Middleware\OnlyRMandRMWOLMT::class,
     ];
 }

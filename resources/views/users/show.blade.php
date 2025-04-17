@@ -23,6 +23,8 @@ Show User
                         RM
                     @elseif ($user->role_id == 2)
                         DCM
+                    @elseif ($user->role_id == 4)
+                        RMWOLMT
                     @else
                         IT
                     @endif

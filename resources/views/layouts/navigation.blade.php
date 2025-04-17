@@ -43,7 +43,7 @@
         </li>
     @endif
     
-    
+    @if (Auth::user()->role_id == 1 || Auth::user()->role_id == 2 || Auth::user()->role_id == 3)
         <li class="nav-group" aria-expanded="false">
             <a class="nav-link nav-group-toggle" href="#">
                 <img src="{{ asset('icons/form.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
@@ -69,7 +69,7 @@
                 @endif          
             </ul>
         </li>
-    
+    @endif
 
     <li class="nav-group" aria-expanded="false">
         <a class="nav-link nav-group-toggle" href="#">
@@ -86,7 +86,7 @@
                 </a>
             </li>
 
-            @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 1)
+            @if (Auth::user()->role_id == 3 || Auth::user()->role_id == 1 || Auth::user()->role_id == 4)
                 <li class="nav-item">
                     <a class="nav-link {{ request()->is('roles*') ? 'active' : '' }}" href="{{ route('window-approve.index') }}">
                         <img src="{{ asset('icons/windowapproval.png') }}" class="nav-icon" style="width: 20px; height: 20px;">
